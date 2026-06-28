@@ -1,0 +1,33 @@
+<section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+  <% stats.forEach((item) => { %>
+    <article class="rounded-lg border border-line bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+      <p class="text-sm font-semibold text-ink/60 dark:text-white/60"><%= item.label %></p>
+      <p class="mt-3 font-display text-4xl font-extrabold"><%= item.value %></p>
+    </article>
+  <% }) %>
+</section>
+
+<section class="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+  <article class="rounded-lg border border-line bg-white p-6 dark:border-white/10 dark:bg-white/5">
+    <h2 class="font-display text-2xl font-extrabold">Platform status</h2>
+    <p class="mt-3 text-sm leading-6 text-ink/70 dark:text-white/65">
+      The admin foundation includes secure auth, blog CRUD, category management, media/settings shells, analytics navigation, and responsive dark mode.
+    </p>
+    <div class="mt-6 grid gap-3 sm:grid-cols-2">
+      <a class="btn-secondary" href="/admin/posts">Manage Posts</a>
+      <a class="btn-secondary" href="/admin/projects">Manage Projects</a>
+      <a class="btn-secondary" href="/admin/tools">Manage Tools</a>
+      <a class="btn-secondary" href="/admin/settings">Settings</a>
+    </div>
+  </article>
+
+  <article class="rounded-lg border border-line bg-ink p-6 text-white dark:border-white/10">
+    <h2 class="font-display text-2xl font-extrabold">Publishing workflow</h2>
+    <ul class="mt-4 grid gap-3 text-sm leading-6 text-white/75">
+      <li>Create drafts and publish when ready.</li>
+      <li>Manage featured posts, categories, tags, and reading time.</li>
+      <li>Control SEO title, description, Open Graph image, and canonical URL.</li>
+      <li>Sitemap and RSS update automatically from published posts.</li>
+    </ul>
+  </article>
+</section>

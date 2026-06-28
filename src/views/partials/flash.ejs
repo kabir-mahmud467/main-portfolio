@@ -1,0 +1,19 @@
+<% if (flash.success && flash.success.length) { %>
+  <section class="container-page pt-6">
+    <% flash.success.forEach((message) => { %>
+      <div class="rounded-md border border-moss/20 bg-moss/10 px-4 py-3 text-sm font-medium text-moss">
+        <%= message %>
+      </div>
+    <% }) %>
+  </section>
+<% } %>
+
+<% if (flash.error && flash.error.length) { %>
+  <section class="container-page pt-6">
+    <% flash.error.forEach((message) => { %>
+      <div class="rounded-md border border-flame/20 bg-flame/10 px-4 py-3 text-sm font-medium text-flame">
+        <%= message %>
+      </div>
+    <% }) %>
+  </section>
+<% } %>

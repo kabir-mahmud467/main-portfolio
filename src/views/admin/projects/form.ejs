@@ -1,0 +1,41 @@
+<section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div>
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Project</p>
+    <h2 class="font-display text-3xl font-extrabold"><%= title %></h2>
+  </div>
+  <a class="btn-secondary" href="/admin/projects">Back</a>
+</section>
+
+<form action="<%= action %>" method="post" class="mt-6 grid gap-6 lg:grid-cols-[1fr_24rem]">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="grid gap-5 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="title" value="<%= project?.title || '' %>" placeholder="Project title" required>
+    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="slug" value="<%= project?.slug || '' %>" placeholder="Slug">
+    <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="summary" placeholder="Summary" required><%= project?.summary || '' %></textarea>
+    <textarea class="focus-ring min-h-[24rem] rounded-md border border-line px-3 py-3 font-mono text-sm text-ink" name="description" placeholder="Markdown description" required><%= project?.description || '' %></textarea>
+  </div>
+  <aside class="grid content-start gap-5">
+    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+      <select class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="status">
+        <option value="draft" <%= project?.status === 'draft' ? 'selected' : '' %>>Draft</option>
+        <option value="published" <%= project?.status === 'published' ? 'selected' : '' %>>Published</option>
+      </select>
+      <label class="flex items-center gap-2 text-sm font-semibold"><input name="featured" type="checkbox" <%= project?.featured ? 'checked' : '' %>> Featured project</label>
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="order" type="number" value="<%= project?.order || 0 %>" placeholder="Order">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="coverImage" value="<%= project?.coverImage || '' %>" placeholder="Cover image URL">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="gallery" value="<%= (project?.gallery || []).join(', ') %>" placeholder="Gallery image URLs">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="techStack" value="<%= (project?.techStack || []).join(', ') %>" placeholder="Node.js, MongoDB">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="categories" value="<%= (project?.categories || []).join(', ') %>" placeholder="SaaS, Portfolio">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="github" value="<%= project?.links?.github || '' %>" placeholder="GitHub link">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="live" value="<%= project?.links?.live || '' %>" placeholder="Live demo">
+    </div>
+    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+      <h3 class="font-bold">SEO</h3>
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="seoTitle" value="<%= project?.seo?.title || '' %>" placeholder="SEO title">
+      <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="seoDescription" placeholder="SEO description"><%= project?.seo?.description || '' %></textarea>
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="ogImage" value="<%= project?.seo?.ogImage || '' %>" placeholder="Open Graph image">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="canonicalUrl" value="<%= project?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
+    </div>
+    <button class="btn-primary w-full" type="submit"><%= submitLabel %></button>
+  </aside>
+</form>

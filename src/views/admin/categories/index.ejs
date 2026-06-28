@@ -1,0 +1,27 @@
+<section class="grid gap-6 lg:grid-cols-[24rem_1fr]">
+  <form action="/admin/categories" method="post" class="grid content-start gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <h2 class="font-display text-2xl font-extrabold">New Category</h2>
+    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="name" placeholder="Name" required>
+    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="slug" placeholder="Slug">
+    <textarea class="focus-ring min-h-28 rounded-md border border-line px-3 py-3 text-ink" name="description" placeholder="Description"></textarea>
+    <button class="btn-primary" type="submit">Create Category</button>
+  </form>
+  <div class="rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+    <h2 class="font-display text-2xl font-extrabold">Categories</h2>
+    <div class="mt-5 grid gap-3">
+      <% categories.forEach((category) => { %>
+        <div class="flex items-center justify-between gap-4 rounded-md border border-line p-4 dark:border-white/10">
+          <div>
+            <p class="font-bold"><%= category.name %></p>
+            <p class="text-sm text-ink/60 dark:text-white/60">/<%= category.slug %></p>
+          </div>
+          <form action="/admin/categories/<%= category._id %>/delete" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="text-sm font-bold text-flame" type="submit">Delete</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>

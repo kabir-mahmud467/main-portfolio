@@ -1,0 +1,9 @@
+<nav class="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
+  <a class="nav-link <%= currentPath === '/' ? 'nav-link-active' : '' %>" href="/">Home</a>
+  <a class="nav-link <%= currentPath === '/about' ? 'nav-link-active' : '' %>" href="/about">About</a>
+  <a class="nav-link <%= currentPath.startsWith('/blog') ? 'nav-link-active' : '' %>" href="/blog">Blog</a>
+  <a class="nav-link <%= currentPath.startsWith('/projects') ? 'nav-link-active' : '' %>" href="/projects">Projects</a>
+  <a class="nav-link <%= currentPath.startsWith('/tools') ? 'nav-link-active' : '' %>" href="/tools">Tools</a>
+  <a class="nav-link <%= currentPath === '/contact' ? 'nav-link-active' : '' %>" href="/contact">Contact</a>
+  <a class="btn-primary ml-2" href="/admin">Dashboard</a>
+</nav>

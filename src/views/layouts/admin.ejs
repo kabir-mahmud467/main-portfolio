@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+    <%- typeof style !== "undefined" ? style : "" %>
+  </head>
+  <body class="min-h-screen bg-[#f3f0e8] font-sans text-ink dark:bg-[#0d1117] dark:text-white">
+    <div class="min-h-screen lg:flex">
+      <%- include("../partials/sidebar") %>
+
+      <div class="min-w-0 flex-1">
+        <header class="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur dark:border-white/10 dark:bg-[#111827]/90">
+          <div class="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+            <button
+              type="button"
+              data-sidebar-button
+              class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white lg:hidden"
+              aria-label="Toggle admin sidebar"
+            >
+              <span class="h-0.5 w-5 bg-ink before:block before:h-0.5 before:w-5 before:-translate-y-1.5 before:bg-ink after:block after:h-0.5 after:w-5 after:translate-y-1 after:bg-ink"></span>
+            </button>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-ink/50">Admin</p>
+              <h1 class="font-display text-xl font-bold"><%= title %></h1>
+            </div>
+            <div class="flex items-center gap-2">
+              <button data-dark-mode-button type="button" class="focus-ring inline-flex min-h-10 items-center rounded-md border border-line bg-white px-3 text-sm font-bold text-ink dark:border-white/10 dark:bg-white/10 dark:text-white">Dark</button>
+              <a href="/" class="btn-secondary dark:border-white/10 dark:bg-white/10 dark:text-white">View Site</a>
+            </div>
+          </div>
+        </header>
+
+        <main class="px-4 py-8 sm:px-6 lg:px-8">
+          <%- include("../partials/flash") %>
+          <%- body %>
+        </main>
+      </div>
+    </div>
+
+    <script src="/js/admin.js" defer></script>
+    <%- typeof script !== "undefined" ? script : "" %>
+  </body>
+</html>

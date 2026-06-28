@@ -1,0 +1,61 @@
+<section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div>
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Blog</p>
+    <h2 class="font-display text-3xl font-extrabold"><%= title %></h2>
+  </div>
+  <a class="btn-secondary" href="/admin/posts">Back</a>
+</section>
+
+<form action="<%= action %>" method="post" class="mt-6 grid gap-6 lg:grid-cols-[1fr_24rem]">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="grid gap-5 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+    <label class="grid gap-2 text-sm font-semibold">Title
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-base font-normal text-ink" name="title" value="<%= post?.title || '' %>" required>
+    </label>
+    <label class="grid gap-2 text-sm font-semibold">Slug
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-base font-normal text-ink" name="slug" value="<%= post?.slug || '' %>" placeholder="auto-generated from title">
+    </label>
+    <label class="grid gap-2 text-sm font-semibold">Excerpt
+      <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-base font-normal text-ink" name="excerpt" required><%= post?.excerpt || '' %></textarea>
+    </label>
+    <label class="grid gap-2 text-sm font-semibold">Markdown Content
+      <textarea class="focus-ring min-h-[28rem] rounded-md border border-line px-3 py-3 font-mono text-sm font-normal leading-6 text-ink" name="content" required><%= post?.content || '' %></textarea>
+    </label>
+  </div>
+
+  <aside class="grid content-start gap-5">
+    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+      <label class="grid gap-2 text-sm font-semibold">Status
+        <select class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="status">
+          <option value="draft" <%= post?.status === 'draft' ? 'selected' : '' %>>Draft</option>
+          <option value="published" <%= post?.status === 'published' ? 'selected' : '' %>>Published</option>
+        </select>
+      </label>
+      <label class="flex items-center gap-2 text-sm font-semibold">
+        <input name="featured" type="checkbox" <%= post?.featured ? 'checked' : '' %>>
+        Featured post
+      </label>
+      <label class="grid gap-2 text-sm font-semibold">Featured Image URL
+        <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="coverImage" value="<%= post?.coverImage || '' %>">
+      </label>
+      <label class="grid gap-2 text-sm font-semibold">Categories
+        <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="categories" value="<%= (post?.categories || []).join(', ') %>" placeholder="Architecture, Node.js">
+      </label>
+      <label class="grid gap-2 text-sm font-semibold">Tags
+        <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="express, mongodb">
+      </label>
+    </div>
+    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
+      <h3 class="font-bold">SEO</h3>
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="seoTitle" value="<%= post?.seo?.title || '' %>" placeholder="SEO title">
+      <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="seoDescription" placeholder="SEO description"><%= post?.seo?.description || '' %></textarea>
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="ogImage" value="<%= post?.seo?.ogImage || '' %>" placeholder="Open Graph image URL">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="canonicalUrl" value="<%= post?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
+      <label class="flex items-center gap-2 text-sm font-semibold">
+        <input name="noIndex" type="checkbox" <%= post?.seo?.noIndex ? 'checked' : '' %>>
+        No index
+      </label>
+    </div>
+    <button class="btn-primary w-full" type="submit"><%= submitLabel %></button>
+  </aside>
+</form>

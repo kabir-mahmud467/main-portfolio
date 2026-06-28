@@ -1,0 +1,210 @@
+<section class="relative overflow-hidden border-b border-line bg-ink text-white">
+  <div class="container-page grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+    <div class="animate-rise">
+      <p class="text-sm font-bold uppercase tracking-wider text-flame">kabirmahmud.xyz</p>
+      <h1 class="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+        Software architecture, developer tools, and technical content that scale.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-white/70">
+        A premium personal platform for full-stack engineering, portfolio proof, practical writing, and fast browser-first utilities.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="/projects" class="focus-ring inline-flex min-h-11 items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-bold text-ink transition hover:bg-paper">View Projects</a>
+        <a href="/tools" class="focus-ring inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10">Explore Tools</a>
+      </div>
+    </div>
+
+    <div class="animate-rise rounded-lg border border-white/10 bg-white/5 p-4 shadow-soft backdrop-blur">
+      <div class="rounded-md border border-white/10 bg-[#0f1720] p-4">
+        <div class="flex gap-2">
+          <span class="h-3 w-3 rounded-full bg-flame"></span>
+          <span class="h-3 w-3 rounded-full bg-[#d4a017]"></span>
+          <span class="h-3 w-3 rounded-full bg-moss"></span>
+        </div>
+        <pre class="mt-5 overflow-hidden text-sm leading-7 text-white/75"><code>const platform = {
+  stack: ["Node", "Express", "MongoDB", "EJS"],
+  focus: "fast server-rendered experiences",
+  modules: ["blog", "portfolio", "tools", "admin"],
+  posture: "secure, scalable, SEO-ready"
+};</code></pre>
+      </div>
+      <div class="mt-4 grid grid-cols-2 gap-3">
+        <% statistics.forEach((item) => { %>
+          <div class="rounded-md border border-white/10 bg-white/5 p-4">
+            <p class="text-2xl font-extrabold"><%= item.value %></p>
+            <p class="mt-1 text-xs font-bold uppercase tracking-wider text-white/50"><%= item.label %></p>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16">
+  <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-ocean">About</p>
+      <h2 class="mt-3 font-display text-3xl font-extrabold">A developer brand built around useful systems.</h2>
+    </div>
+    <p class="text-lg leading-8 text-ink/70">
+      Kabir Mahmud focuses on production-ready web platforms: clean architecture, practical admin workflows, technical publishing, SEO foundations, and lightweight interfaces that feel fast on every device.
+    </p>
+  </div>
+</section>
+
+<section class="border-y border-line bg-paper py-16">
+  <div class="container-page">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wider text-flame">Skills</p>
+        <h2 class="mt-3 font-display text-3xl font-extrabold">Capabilities</h2>
+      </div>
+      <a href="/contact" class="btn-secondary">Work Together</a>
+    </div>
+    <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <% skills.forEach((skill) => { %>
+        <div class="rounded-lg border border-line bg-white p-4 text-sm font-bold shadow-sm"><%= skill %></div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16">
+  <div class="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-moss">Experience</p>
+      <h2 class="mt-3 font-display text-3xl font-extrabold">Architecture-minded execution.</h2>
+    </div>
+    <div class="grid gap-4">
+      <% experience.forEach((item) => { %>
+        <article class="rounded-lg border border-line bg-paper p-5">
+          <h3 class="text-lg font-extrabold"><%= item.role %></h3>
+          <p class="mt-2 text-sm leading-6 text-ink/70"><%= item.detail %></p>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-ink py-16 text-white">
+  <div class="container-page">
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Tech Stack</p>
+    <h2 class="mt-3 font-display text-3xl font-extrabold">Modern, durable, and intentionally lightweight.</h2>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <% techStack.forEach((tech) => { %>
+        <span class="rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white/80"><%= tech %></span>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-paper py-16">
+  <div class="container-page">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wider text-ocean">Featured Projects</p>
+        <h2 class="mt-3 font-display text-3xl font-extrabold">Selected builds and platform areas.</h2>
+      </div>
+      <a href="/projects" class="btn-secondary">All Projects</a>
+    </div>
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      <% featuredProjects.forEach((project) => { %>
+        <article class="rounded-lg border border-line bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft">
+          <h3 class="text-xl font-extrabold"><a href="<%= project.href %>"><%= project.title %></a></h3>
+          <p class="mt-3 text-sm leading-6 text-ink/70"><%= project.summary %></p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <% project.stack.slice(0, 4).forEach((tech) => { %>
+              <span class="rounded-md border border-line bg-paper px-2.5 py-1 text-xs font-bold text-ink/65"><%= tech %></span>
+            <% }) %>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16">
+  <div class="container-page">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wider text-flame">Featured Tools</p>
+        <h2 class="mt-3 font-display text-3xl font-extrabold">Fast utilities with their own SEO pages.</h2>
+      </div>
+      <a href="/tools" class="btn-secondary">All Tools</a>
+    </div>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <% featuredTools.forEach((tool) => { %>
+        <a class="rounded-lg border border-line bg-paper p-5 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-soft" href="<%= tool.route %>">
+          <p class="text-xs font-bold uppercase tracking-wider text-ocean"><%= tool.category %></p>
+          <h3 class="mt-3 text-lg font-extrabold"><%= tool.name %></h3>
+          <p class="mt-2 text-sm leading-6 text-ink/70"><%= tool.description %></p>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="border-y border-line bg-paper py-16">
+  <div class="container-page">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wider text-moss">Latest Blog Posts</p>
+        <h2 class="mt-3 font-display text-3xl font-extrabold">Technical writing and notes.</h2>
+      </div>
+      <a href="/blog" class="btn-secondary">Read Blog</a>
+    </div>
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      <% if (!latestPosts.length) { %>
+        <article class="rounded-lg border border-line bg-white p-5 md:col-span-3">
+          <h3 class="text-xl font-extrabold">Publishing system ready</h3>
+          <p class="mt-2 text-sm leading-6 text-ink/70">Latest published posts will appear here automatically.</p>
+        </article>
+      <% } %>
+      <% latestPosts.forEach((post) => { %>
+        <article class="rounded-lg border border-line bg-white p-5 shadow-sm">
+          <p class="text-xs font-bold uppercase tracking-wider text-ink/50"><%= post.readingTime %> min read</p>
+          <h3 class="mt-3 text-xl font-extrabold"><a href="/blog/<%= post.slug %>"><%= post.title %></a></h3>
+          <p class="mt-3 text-sm leading-6 text-ink/70"><%= post.excerpt %></p>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16">
+  <div class="container-page grid gap-5 md:grid-cols-2">
+    <% testimonials.forEach((item) => { %>
+      <figure class="rounded-lg border border-line bg-paper p-6">
+        <blockquote class="text-lg font-semibold leading-8">“<%= item.quote %>”</blockquote>
+        <figcaption class="mt-4 text-sm font-bold text-ink/60"><%= item.name %></figcaption>
+      </figure>
+    <% }) %>
+  </div>
+</section>
+
+<section class="bg-ink py-16 text-white">
+  <div class="container-page grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-flame">Newsletter</p>
+      <h2 class="mt-3 font-display text-3xl font-extrabold">Get engineering notes and platform updates.</h2>
+      <p class="mt-3 text-sm leading-6 text-white/65">A minimal subscription surface ready to connect to your future email provider.</p>
+    </div>
+    <form action="/contact" method="get" class="grid gap-3 sm:grid-cols-[1fr_auto]">
+      <input class="focus-ring min-h-12 rounded-md border border-white/10 bg-white px-3 text-ink" type="email" placeholder="you@example.com" aria-label="Email address">
+      <button class="focus-ring inline-flex min-h-12 items-center justify-center rounded-md bg-white px-5 text-sm font-bold text-ink hover:bg-paper" type="submit">Join List</button>
+    </form>
+  </div>
+</section>
+
+<section class="bg-paper py-16">
+  <div class="container-page rounded-lg border border-line bg-white p-6 shadow-sm sm:p-8">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wider text-flame">Contact</p>
+        <h2 class="mt-3 font-display text-3xl font-extrabold">Have a serious web platform to build?</h2>
+        <p class="mt-3 max-w-2xl text-sm leading-6 text-ink/70">Start a conversation about architecture, admin systems, publishing platforms, developer tools, or performance-focused full-stack work.</p>
+      </div>
+      <a href="/contact" class="btn-primary">Contact Kabir</a>
+    </div>
+  </div>
+</section>

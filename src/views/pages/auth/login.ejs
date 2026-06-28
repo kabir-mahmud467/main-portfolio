@@ -1,0 +1,29 @@
+<section class="grid min-h-[calc(100vh-4rem)] place-items-center bg-paper py-12">
+  <div class="w-full max-w-md px-4">
+    <div class="rounded-lg border border-line bg-white p-6 shadow-soft">
+      <p class="text-sm font-bold uppercase tracking-wider text-flame">Admin</p>
+      <h1 class="mt-2 font-display text-3xl font-extrabold">Sign in</h1>
+      <% if (errors.length) { %>
+        <div class="mt-5 rounded-md border border-flame/20 bg-flame/10 p-3 text-sm font-medium text-flame">
+          <% errors.forEach((error) => { %><p><%= error %></p><% }) %>
+        </div>
+      <% } %>
+      <form action="/admin/login" method="post" class="mt-6 grid gap-4">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="next" value="<%= next %>">
+        <label class="grid gap-2 text-sm font-semibold">Email
+          <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-base font-normal" name="email" type="email" autocomplete="email" required>
+        </label>
+        <label class="grid gap-2 text-sm font-semibold">Password
+          <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-base font-normal" name="password" type="password" autocomplete="current-password" required minlength="8">
+        </label>
+        <label class="flex items-center gap-2 text-sm font-medium text-ink/70">
+          <input class="h-4 w-4 rounded border-line text-ink" name="remember" type="checkbox">
+          Remember me
+        </label>
+        <button class="btn-primary w-full" type="submit">Login</button>
+      </form>
+      <a class="mt-5 inline-flex text-sm font-bold text-flame hover:text-ink" href="/admin/forgot-password">Forgot password?</a>
+    </div>
+  </div>
+</section>

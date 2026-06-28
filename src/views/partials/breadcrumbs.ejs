@@ -1,0 +1,12 @@
+<% if (breadcrumbs && breadcrumbs.length) { %>
+  <nav class="flex flex-wrap gap-2 text-sm font-semibold text-ink/60" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach((item, index) => { %>
+      <% if (index) { %><span>/</span><% } %>
+      <% if (item.href) { %>
+        <a class="hover:text-ink" href="<%= item.href %>"><%= item.label %></a>
+      <% } else { %>
+        <span class="text-ink"><%= item.label %></span>
+      <% } %>
+    <% }) %>
+  </nav>
+<% } %>

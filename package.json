@@ -1,0 +1,52 @@
+{
+  "name": "kabirmahmud-platform",
+  "version": "1.0.0",
+  "description": "Production-ready personal brand platform for kabirmahmud.xyz.",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:css\" \"nodemon src/server.js\"",
+    "dev:css": "tailwindcss -i ./src/public/css/tailwind.css -o ./src/public/css/main.css --watch",
+    "build": "npm run build:css",
+    "build:css": "tailwindcss -i ./src/public/css/tailwind.css -o ./src/public/css/main.css --minify",
+    "start": "node src/server.js",
+    "create-admin": "node scripts/create-admin.js",
+    "lint": "node --check src/server.js && node --check src/app.js && node --check api/index.js"
+  },
+  "keywords": [
+    "portfolio",
+    "blog",
+    "tools",
+    "express",
+    "mongodb",
+    "ejs"
+  ],
+  "author": "Kabir Mahmud",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,41 @@
+<section class="border-b border-line bg-white py-14">
+  <div class="container-page">
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Projects</p>
+    <h1 class="mt-3 font-display text-4xl font-extrabold">Selected engineering work</h1>
+    <form action="/projects" method="get" class="mt-8 grid gap-3 md:grid-cols-[1fr_16rem_auto]">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3" name="search" value="<%= search %>" placeholder="Search projects">
+      <input class="focus-ring min-h-11 rounded-md border border-line px-3" name="category" value="<%= category %>" placeholder="Filter category">
+      <button class="btn-primary" type="submit">Filter</button>
+    </form>
+  </div>
+</section>
+
+<section class="bg-paper py-14">
+  <div class="container-page">
+    <% if (!projects.length) { %>
+      <div class="rounded-lg border border-line bg-white p-8 text-center">
+        <h2 class="font-display text-2xl font-extrabold">No projects yet</h2>
+        <p class="mt-2 text-ink/70">Published projects will appear here.</p>
+      </div>
+    <% } %>
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <% projects.forEach((project) => { %>
+        <article class="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+          <% if (project.coverImage) { %>
+            <img class="aspect-[16/9] w-full object-cover" src="<%= project.coverImage %>" alt="" loading="lazy" decoding="async">
+          <% } %>
+          <div class="p-5">
+            <% if (project.featured) { %><span class="rounded-md bg-flame/10 px-2 py-1 text-xs font-bold text-flame">Featured</span><% } %>
+            <h2 class="mt-3 text-xl font-extrabold"><a href="/projects/<%= project.slug %>"><%= project.title %></a></h2>
+            <p class="mt-3 text-sm leading-6 text-ink/70"><%= project.summary %></p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <% (project.techStack || []).slice(0, 5).forEach((tech) => { %>
+                <span class="rounded-md border border-line bg-paper px-2 py-1 text-xs font-bold text-ink/65"><%= tech %></span>
+              <% }) %>
+            </div>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>

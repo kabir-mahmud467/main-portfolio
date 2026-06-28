@@ -1,0 +1,42 @@
+<section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div>
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Publishing</p>
+    <h2 class="font-display text-3xl font-extrabold">Posts</h2>
+  </div>
+  <a class="btn-primary" href="/admin/posts/new">Create Post</a>
+</section>
+
+<section class="mt-6 overflow-hidden rounded-lg border border-line bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-line text-sm dark:divide-white/10">
+      <thead class="bg-paper text-left dark:bg-white/5">
+        <tr>
+          <th class="px-4 py-3 font-bold">Title</th>
+          <th class="px-4 py-3 font-bold">Status</th>
+          <th class="px-4 py-3 font-bold">Featured</th>
+          <th class="px-4 py-3 font-bold">Reading</th>
+          <th class="px-4 py-3 font-bold">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line dark:divide-white/10">
+        <% posts.forEach((post) => { %>
+          <tr>
+            <td class="px-4 py-3 font-semibold"><%= post.title %><p class="text-xs font-normal text-ink/55 dark:text-white/50">/<%= post.slug %></p></td>
+            <td class="px-4 py-3"><span class="rounded-md bg-ink/10 px-2 py-1 text-xs font-bold dark:bg-white/10"><%= post.status %></span></td>
+            <td class="px-4 py-3"><%= post.featured ? "Yes" : "No" %></td>
+            <td class="px-4 py-3"><%= post.readingTime %> min</td>
+            <td class="px-4 py-3">
+              <div class="flex gap-2">
+                <a class="btn-secondary px-3 py-2" href="/admin/posts/<%= post._id %>/edit">Edit</a>
+                <form action="/admin/posts/<%= post._id %>/delete" method="post">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button class="rounded-md border border-flame/30 px-3 py-2 text-sm font-bold text-flame" type="submit">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

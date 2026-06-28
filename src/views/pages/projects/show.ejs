@@ -1,0 +1,44 @@
+<article class="bg-white py-14">
+  <div class="container-page">
+    <div class="grid gap-10 lg:grid-cols-[1fr_22rem]">
+      <div>
+        <%- include("../../partials/breadcrumbs") %>
+        <h1 class="mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl"><%= project.title %></h1>
+        <p class="mt-5 text-lg leading-8 text-ink/70"><%= project.summary %></p>
+        <% if (project.coverImage) { %>
+          <img class="mt-8 aspect-[16/9] w-full rounded-lg border border-line object-cover" src="<%= project.coverImage %>" alt="" fetchpriority="high" decoding="async">
+        <% } %>
+        <div class="prose mt-10 max-w-none">
+          <%- project.html %>
+        </div>
+      </div>
+      <aside class="grid content-start gap-5">
+        <div class="rounded-lg border border-line bg-paper p-5">
+          <h2 class="font-bold">Technology Stack</h2>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <% (project.techStack || []).forEach((tech) => { %>
+              <span class="rounded-md border border-line bg-white px-2 py-1 text-xs font-bold"><%= tech %></span>
+            <% }) %>
+          </div>
+        </div>
+        <div class="rounded-lg border border-line bg-paper p-5">
+          <h2 class="font-bold">Links</h2>
+          <div class="mt-4 grid gap-2">
+            <% if (project.links?.live) { %><a class="btn-primary" href="<%= project.links.live %>" rel="noopener">Live Demo</a><% } %>
+            <% if (project.links?.github) { %><a class="btn-secondary" href="<%= project.links.github %>" rel="noopener">GitHub</a><% } %>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <% if ((project.gallery || []).length) { %>
+      <section class="mt-14">
+        <h2 class="font-display text-3xl font-extrabold">Gallery</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <% project.gallery.forEach((image) => { %>
+            <img class="aspect-[4/3] rounded-lg border border-line object-cover" src="<%= image %>" alt="" loading="lazy" decoding="async">
+          <% }) %>
+        </div>
+      </section>
+    <% } %>
+  </div>
+</article>

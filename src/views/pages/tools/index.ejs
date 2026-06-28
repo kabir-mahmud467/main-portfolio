@@ -1,0 +1,18 @@
+<section class="border-b border-line bg-white py-14">
+  <div class="container-page">
+    <p class="text-sm font-bold uppercase tracking-wider text-flame">Free Tools</p>
+    <h1 class="mt-3 font-display text-4xl font-extrabold">Useful online utilities</h1>
+    <p class="mt-4 max-w-2xl text-lg leading-8 text-ink/70">Fast browser-first tools with their own SEO metadata, schema, routes, controllers, and views.</p>
+  </div>
+</section>
+<section class="bg-paper py-14">
+  <div class="container-page grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <% tools.forEach((tool) => { %>
+      <a class="rounded-lg border border-line bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft" href="/tools/<%= tool.slug %>">
+        <p class="text-xs font-bold uppercase tracking-wider text-ocean"><%= tool.category %></p>
+        <h2 class="mt-3 text-xl font-extrabold"><%= tool.name %></h2>
+        <p class="mt-3 text-sm leading-6 text-ink/70"><%= tool.description %></p>
+      </a>
+    <% }) %>
+  </div>
+</section>
