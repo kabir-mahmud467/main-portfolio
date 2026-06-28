@@ -76,7 +76,7 @@ git init
 git add .
 git commit -m "Initial production platform"
 git branch -M main
-git remote add origin git@github.com:YOUR_USERNAME/kabirmahmud-platform.git
+git remote add origin https://github.com/kabir-mahmud467/main-portfolio.git
 git push -u origin main
 ```
 
