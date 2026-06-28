@@ -65,6 +65,34 @@
     @apply mt-6;
   }
 
+  .prose img {
+    @apply mt-6 rounded-lg border border-line;
+  }
+
+  .prose table {
+    @apply mt-6 w-full border-collapse overflow-hidden rounded-lg text-left text-sm;
+  }
+
+  .prose th {
+    @apply border border-line bg-paper px-3 py-2 font-bold;
+  }
+
+  .prose td {
+    @apply border border-line px-3 py-2;
+  }
+
+  .prose ul {
+    @apply mt-5 list-disc pl-6;
+  }
+
+  .prose ol {
+    @apply mt-5 list-decimal pl-6;
+  }
+
+  .prose li {
+    @apply mt-2;
+  }
+
   .animate-rise {
     animation: rise 700ms ease both;
   }

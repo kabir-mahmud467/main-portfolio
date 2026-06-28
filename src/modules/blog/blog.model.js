@@ -6,6 +6,7 @@ const postSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true, lowercase: true, trim: true },
     excerpt: { type: String, required: true, trim: true, maxlength: 320 },
     content: { type: String, required: true },
+    contentFormat: { type: String, enum: ["markdown", "html"], default: "markdown" },
     coverImage: { type: String, default: null },
     status: { type: String, enum: ["draft", "published", "archived"], default: "draft", index: true },
     featured: { type: Boolean, default: false, index: true },

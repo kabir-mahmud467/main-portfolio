@@ -18,8 +18,14 @@
     <label class="grid gap-2 text-sm font-semibold">Excerpt
       <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-base font-normal text-ink" name="excerpt" required><%= post?.excerpt || '' %></textarea>
     </label>
-    <label class="grid gap-2 text-sm font-semibold">Markdown Content
-      <textarea class="focus-ring min-h-[28rem] rounded-md border border-line px-3 py-3 font-mono text-sm font-normal leading-6 text-ink" name="content" required><%= post?.content || '' %></textarea>
+    <label class="grid gap-2 text-sm font-semibold">Content Format
+      <select class="focus-ring min-h-11 rounded-md border border-line px-3 text-base font-normal text-ink" name="contentFormat">
+        <option value="markdown" <%= !post?.contentFormat || post?.contentFormat === 'markdown' ? 'selected' : '' %>>Markdown</option>
+        <option value="html" <%= post?.contentFormat === 'html' ? 'selected' : '' %>>HTML</option>
+      </select>
+    </label>
+    <label class="grid gap-2 text-sm font-semibold">Post Content
+      <textarea class="focus-ring min-h-[28rem] rounded-md border border-line px-3 py-3 font-mono text-sm font-normal leading-6 text-ink" name="content" required placeholder="Paste markdown or full HTML article code here. HTML is sanitized before public rendering."><%= post?.content || '' %></textarea>
     </label>
   </div>
 

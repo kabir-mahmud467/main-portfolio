@@ -2,6 +2,7 @@ import { appConfig } from "../../config/app.config.js";
 import { calculateReadingTime } from "../../core/utils/readingTime.js";
 import { slugify } from "../../core/utils/slugify.js";
 import { renderMarkdown } from "../../core/utils/markdown.js";
+import { sanitizeHtml, stripHtml } from "../../core/utils/sanitizeHtml.js";
 import {
   countPublishedPosts,
   createCategory,
@@ -28,18 +29,21 @@ function normalizeList(value) {
 function normalizePostPayload(body) {
   const status = body.status === "published" ? "published" : "draft";
   const publishedAt = status === "published" ? body.publishedAt || new Date() : null;
+  const contentFormat = body.contentFormat === "html" ? "html" : "markdown";
+  const readableContent = contentFormat === "html" ? stripHtml(body.content) : body.content;
 
   return {
     title: body.title,
     slug: slugify(body.slug || body.title),
     excerpt: body.excerpt,
     content: body.content,
+    contentFormat,
     coverImage: body.coverImage || null,
     status,
     featured: body.featured === "on",
     categories: normalizeList(body.categories),
     tags: normalizeList(body.tags),
-    readingTime: calculateReadingTime(body.content),
+    readingTime: calculateReadingTime(readableContent),
     publishedAt,
     seo: {
       title: body.seoTitle || body.title,
@@ -71,10 +75,11 @@ export async function getPublishedPost(slug) {
   const post = await findPostBySlug(slug);
   if (!post) return null;
   const relatedPosts = await findRelatedPosts(post);
+  const isHtml = post.contentFormat === "html";
   return {
     post: {
       ...post,
-      html: renderMarkdown(post.content)
+      html: isHtml ? sanitizeHtml(post.content) : renderMarkdown(post.content)
     },
     relatedPosts
   };
