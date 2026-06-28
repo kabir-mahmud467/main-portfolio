@@ -17,9 +17,17 @@ await mongoose.connect(dbConfig.uri);
 
 const existing = await findUserByEmail(email);
 if (existing) {
-  console.error("An account with that email already exists.");
+  existing.name = name;
+  existing.passwordHash = await hashPassword(password);
+  existing.role = "admin";
+  existing.isActive = true;
+  existing.failedLoginAttempts = 0;
+  existing.lockedUntil = null;
+  existing.rememberTokens = [];
+  await existing.save();
+  console.log("Admin user updated.");
   await mongoose.disconnect();
-  process.exit(1);
+  process.exit(0);
 }
 
 await createUser({

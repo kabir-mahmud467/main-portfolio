@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const rememberTokenSchema = new mongoose.Schema(
   {
-    tokenHash: { type: String, required: true, index: true },
+    tokenHash: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     expiresAt: { type: Date, required: true }
   },
