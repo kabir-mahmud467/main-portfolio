@@ -2,6 +2,7 @@ import { validationResult } from "express-validator";
 import { appConfig } from "../../config/app.config.js";
 import { securityConfig } from "../../config/security.config.js";
 import { buildMeta } from "../../core/utils/metaBuilder.js";
+import { saveSession } from "../../core/utils/session.js";
 import {
   loginAdmin,
   logoutAdmin,
@@ -68,6 +69,7 @@ export async function handleLogin(req, res) {
       });
     }
 
+    await saveSession(req);
     req.flash("success", "Welcome back.");
     return res.redirect(result.redirectTo);
   } catch (error) {

@@ -1,5 +1,6 @@
 import { securityConfig } from "../../config/security.config.js";
 import { findUserById, findUserByRememberTokenHash } from "../../modules/auth/auth.repository.js";
+import { saveSession } from "../utils/session.js";
 import { hashToken } from "../utils/tokens.js";
 
 export async function attachAuthenticatedUser(req, res, next) {
@@ -25,6 +26,7 @@ export async function attachAuthenticatedUser(req, res, next) {
     req.session.userId = user._id.toString();
     req.session.role = user.role;
     req.user = user;
+    await saveSession(req);
     return next();
   } catch (error) {
     return next(error);

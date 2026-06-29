@@ -7,9 +7,12 @@ import rateLimit from "express-rate-limit";
 import session from "express-session";
 import helmet from "helmet";
 import morgan from "morgan";
+import mongoose from "mongoose";
 import { appConfig } from "../../config/app.config.js";
-import { dbConfig } from "../../config/db.config.js";
+import { connectDatabase } from "../../config/db.js";
 import { securityConfig } from "../../config/security.config.js";
+
+const sessionStoreClientPromise = connectDatabase().then(() => mongoose.connection.getClient());
 
 export function registerCoreMiddleware(app, express) {
   app.set("trust proxy", appConfig.trustProxy);
@@ -46,7 +49,7 @@ export function registerCoreMiddleware(app, express) {
       resave: false,
       saveUninitialized: false,
       store: MongoStore.create({
-        mongoUrl: dbConfig.uri,
+        clientPromise: sessionStoreClientPromise,
         collectionName: "sessions",
         ttl: 60 * 60 * 24 * 7
       }),
