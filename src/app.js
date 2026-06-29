@@ -15,6 +15,7 @@ import { authRouter } from "./modules/auth/auth.routes.js";
 import { attachAuthenticatedUser } from "./core/middleware/auth.middleware.js";
 import { csrfProtection } from "./core/middleware/csrf.middleware.js";
 import { performanceHeaders } from "./core/middleware/performance.middleware.js";
+import { ensureDatabaseConnection } from "./core/middleware/database.middleware.js";
 import { renderRss, renderSitemap } from "./modules/blog/blog.controller.js";
 import { renderRobots } from "./modules/pages/pages.controller.js";
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, "public"), {
   maxAge: "7d"
 }));
 
+app.use(ensureDatabaseConnection);
 app.use(attachAuthenticatedUser);
 app.use(csrfProtection);
 app.use(viewLocals);

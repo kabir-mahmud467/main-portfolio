@@ -3,6 +3,7 @@ import { appConfig } from "../../config/app.config.js";
 import { Post } from "../blog/blog.model.js";
 import { Project } from "../projects/project.model.js";
 import { toolDefinitions } from "../tools/tools.registry.js";
+import { logger } from "../../core/utils/logger.js";
 
 const fallbackProjects = [
   {
@@ -73,10 +74,19 @@ const testimonials = [
 
 export async function renderHomePage(req, res, next) {
   try {
-    const [dbProjects, latestPosts] = await Promise.all([
-      Project.find({ status: "published", featured: true }).sort({ order: 1, publishedAt: -1 }).limit(3).lean(),
-      Post.find({ status: "published" }).sort({ publishedAt: -1 }).limit(3).lean()
-    ]);
+    let dbProjects = [];
+    let latestPosts = [];
+
+    try {
+      [dbProjects, latestPosts] = await Promise.all([
+        Project.find({ status: "published", featured: true }).sort({ order: 1, publishedAt: -1 }).limit(3).lean(),
+        Post.find({ status: "published" }).sort({ publishedAt: -1 }).limit(3).lean()
+      ]);
+    } catch (error) {
+      logger.warn("Homepage content query failed; rendering fallback content", {
+        error: error.message
+      });
+    }
 
     const featuredProjects = dbProjects.length
       ? dbProjects.map((project) => ({
