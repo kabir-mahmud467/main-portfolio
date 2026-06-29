@@ -1,8 +1,6 @@
-import { createApp } from "../src/app.js";
+import app from "../src/app.js";
 import { connectDatabase } from "../src/config/db.js";
 import { logger } from "../src/core/utils/logger.js";
-
-const app = createApp();
 
 export default async function handler(req, res) {
   try {

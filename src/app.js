@@ -21,41 +21,39 @@ import { renderRobots } from "./modules/pages/pages.controller.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createApp() {
-  const app = express();
+const app = express();
 
-  app.set("view engine", "ejs");
-  app.set("views", path.join(__dirname, "views"));
-  app.use(expressLayouts);
-  app.set("layout", "layouts/main");
-  app.set("layout extractScripts", true);
-  app.set("layout extractStyles", true);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(expressLayouts);
+app.set("layout", "layouts/main");
+app.set("layout extractScripts", true);
+app.set("layout extractStyles", true);
 
-  registerCoreMiddleware(app, express);
-  app.use(performanceHeaders);
+registerCoreMiddleware(app, express);
+app.use(performanceHeaders);
 
-  app.use(express.static(path.join(__dirname, "public"), {
-    etag: true,
-    maxAge: "7d"
-  }));
+app.use(express.static(path.join(__dirname, "public"), {
+  etag: true,
+  maxAge: "7d"
+}));
 
-  app.use(attachAuthenticatedUser);
-  app.use(csrfProtection);
-  app.use(viewLocals);
+app.use(attachAuthenticatedUser);
+app.use(csrfProtection);
+app.use(viewLocals);
 
-  app.use("/", pagesRouter);
-  app.get("/robots.txt", renderRobots);
-  app.use("/blog", blogRouter);
-  app.get("/sitemap.xml", renderSitemap);
-  app.get("/rss.xml", renderRss);
-  app.use("/projects", projectsRouter);
-  app.use("/tools", toolsRouter);
-  app.use("/contact", contactRouter);
-  app.use("/admin", authRouter);
-  app.use("/admin", adminRouter);
+app.use("/", pagesRouter);
+app.get("/robots.txt", renderRobots);
+app.use("/blog", blogRouter);
+app.get("/sitemap.xml", renderSitemap);
+app.get("/rss.xml", renderRss);
+app.use("/projects", projectsRouter);
+app.use("/tools", toolsRouter);
+app.use("/contact", contactRouter);
+app.use("/admin", authRouter);
+app.use("/admin", adminRouter);
 
-  app.use(notFoundHandler);
-  app.use(errorHandler);
+app.use(notFoundHandler);
+app.use(errorHandler);
 
-  return app;
-}
+export default app;
