@@ -11,8 +11,18 @@ import mongoose from "mongoose";
 import { appConfig } from "../../config/app.config.js";
 import { connectDatabase } from "../../config/db.js";
 import { securityConfig } from "../../config/security.config.js";
+import { debugLog } from "../utils/debugLog.js";
 
 const sessionStoreClientPromise = connectDatabase().then(() => mongoose.connection.getClient());
+
+// #region agent log
+debugLog("security.middleware.js:init", "cookie parser config at startup", {
+  hasCookieSecret: Boolean(appConfig.cookieSecret),
+  cookieSecretLength: appConfig.cookieSecret ? appConfig.cookieSecret.length : 0,
+  isProduction: appConfig.isProduction,
+  isVercel: appConfig.isVercel
+}, "H1");
+// #endregion
 
 export function registerCoreMiddleware(app, express) {
   app.set("trust proxy", appConfig.trustProxy);
@@ -42,6 +52,19 @@ export function registerCoreMiddleware(app, express) {
   app.use(express.urlencoded({ extended: true, limit: "1mb" }));
   app.use(express.json({ limit: "1mb" }));
   app.use(cookieParser(appConfig.cookieSecret));
+  app.use((req, res, next) => {
+    // #region agent log
+    debugLog("security.middleware.js:after-cookie-parser", "request cookie parser state", {
+      method: req.method,
+      path: req.originalUrl,
+      hasReqSecret: Boolean(req.secret),
+      hasSignedCookies: Boolean(req.signedCookies),
+      hasSessionCookie: Boolean(req.cookies?.["km.sid"]),
+      hasRememberCookie: Boolean(req.cookies?.["km.remember"])
+    }, "H1");
+    // #endregion
+    next();
+  });
   app.use(
     session({
       name: "km.sid",

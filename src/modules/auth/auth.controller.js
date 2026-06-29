@@ -2,6 +2,7 @@ import { validationResult } from "express-validator";
 import { appConfig } from "../../config/app.config.js";
 import { securityConfig } from "../../config/security.config.js";
 import { buildMeta } from "../../core/utils/metaBuilder.js";
+import { debugLog } from "../../core/utils/debugLog.js";
 import { saveSession } from "../../core/utils/session.js";
 import {
   loginAdmin,
@@ -52,12 +53,32 @@ export async function handleLogin(req, res) {
   }
 
   try {
+    const remember = req.body.remember === "on";
+
+    // #region agent log
+    debugLog("auth.controller.js:handleLogin", "login attempt start", {
+      remember,
+      hasReqSecret: Boolean(req.secret),
+      hasSessionBeforeLogin: Boolean(req.session?.userId)
+    }, "H2");
+    // #endregion
+
     const result = await loginAdmin(req, {
       email: req.body.email,
       password: req.body.password,
-      remember: req.body.remember === "on",
+      remember,
       next: req.body.next
     });
+
+    // #region agent log
+    debugLog("auth.controller.js:handleLogin", "login credentials accepted", {
+      remember,
+      hasRememberToken: Boolean(result.rememberToken),
+      hasReqSecret: Boolean(req.secret),
+      sessionUserId: req.session?.userId || null,
+      redirectTo: result.redirectTo
+    }, "H3");
+    // #endregion
 
     if (result.rememberToken) {
       res.cookie(securityConfig.rememberCookieName, result.rememberToken, {
@@ -70,9 +91,25 @@ export async function handleLogin(req, res) {
     }
 
     await saveSession(req);
+
+    // #region agent log
+    debugLog("auth.controller.js:handleLogin", "session saved before redirect", {
+      sessionUserId: req.session?.userId || null,
+      redirectTo: result.redirectTo
+    }, "H5");
+    // #endregion
+
     req.flash("success", "Welcome back.");
     return res.redirect(result.redirectTo);
   } catch (error) {
+    // #region agent log
+    debugLog("auth.controller.js:handleLogin", "login failed", {
+      errorMessage: error.message,
+      hasReqSecret: Boolean(req.secret),
+      remember: req.body.remember === "on"
+    }, "H2");
+    // #endregion
+
     return res.status(401).render("pages/auth/login", {
       title: "Admin Login",
       meta: buildMeta(req, {

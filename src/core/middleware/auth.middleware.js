@@ -1,10 +1,21 @@
 import { securityConfig } from "../../config/security.config.js";
 import { findUserById, findUserByRememberTokenHash } from "../../modules/auth/auth.repository.js";
+import { debugLog } from "../utils/debugLog.js";
 import { saveSession } from "../utils/session.js";
 import { hashToken } from "../utils/tokens.js";
 
 export async function attachAuthenticatedUser(req, res, next) {
   try {
+    // #region agent log
+    debugLog("auth.middleware.js:attachAuthenticatedUser", "auth attach entry", {
+      method: req.method,
+      path: req.originalUrl,
+      hasReqSecret: Boolean(req.secret),
+      hasSessionUserId: Boolean(req.session?.userId),
+      hasRememberCookieRaw: Boolean(req.cookies?.[securityConfig.rememberCookieName])
+    }, "H4");
+    // #endregion
+
     if (req.session?.userId) {
       req.user = await findUserById(req.session.userId);
       return next();
@@ -29,6 +40,13 @@ export async function attachAuthenticatedUser(req, res, next) {
     await saveSession(req);
     return next();
   } catch (error) {
+    // #region agent log
+    debugLog("auth.middleware.js:attachAuthenticatedUser", "auth attach error", {
+      method: req.method,
+      path: req.originalUrl,
+      errorMessage: error.message
+    }, "H4");
+    // #endregion
     return next(error);
   }
 }
