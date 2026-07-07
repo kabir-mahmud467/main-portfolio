@@ -1311,6 +1311,10 @@ body {
   border-radius: 0.25rem;
 }
 
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -1669,6 +1673,10 @@ body {
   line-height: 1.25;
 }
 
+.tracking-\[0\.2em\] {
+  letter-spacing: 0.2em;
+}
+
 .tracking-normal {
   letter-spacing: 0em;
 }
@@ -1705,6 +1713,10 @@ body {
 
 .text-ink\/70 {
   color: rgb(16 20 25 / 0.7);
+}
+
+.text-ink\/75 {
+  color: rgb(16 20 25 / 0.75);
 }
 
 .text-moss {

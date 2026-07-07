@@ -158,6 +158,26 @@ export function renderTermsPage(req, res) {
   });
 }
 
+export function renderTermsAndConditionsPage(req, res) {
+  res.render("pages/terms-and-conditions", {
+    title: "Terms and Conditions",
+    meta: buildMeta(req, {
+      title: "Terms and Conditions",
+      description: "The broader usage terms and conditions for browsing the site and using its resources."
+    })
+  });
+}
+
+export function renderDmcapage(req, res) {
+  res.render("pages/dmca", {
+    title: "DMCA Policy",
+    meta: buildMeta(req, {
+      title: "DMCA Policy",
+      description: "How copyright concerns are handled and how takedown requests are processed on this site."
+    })
+  });
+}
+
 export function renderRobots(req, res) {
   res.type("text/plain").send(`User-agent: *
 Allow: /

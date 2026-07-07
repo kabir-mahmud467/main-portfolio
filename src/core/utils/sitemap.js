@@ -19,15 +19,8 @@ function isLocalhostUrl(value) {
   return /^(https?:\/\/)?(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i.test(value);
 }
 
-export function buildSitemapXml({ staticUrls = [], blogUrls = [], projectUrls = [], toolUrls = [] } = {}) {
-  const baseUrl = normalizeUrl(appConfig.url);
-
-  if (!baseUrl || isLocalhostUrl(baseUrl)) {
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-</urlset>`;
-  }
-
+export function buildSitemapXml({ staticUrls = [], blogUrls = [], projectUrls = [], toolUrls = [], baseUrl = "" } = {}) {
+  const normalizedBaseUrl = normalizeUrl(baseUrl || appConfig.url);
   const seen = new Set();
   const urls = [...staticUrls, ...blogUrls, ...projectUrls, ...toolUrls]
     .filter(Boolean)
@@ -35,8 +28,19 @@ export function buildSitemapXml({ staticUrls = [], blogUrls = [], projectUrls = 
       loc: normalizeUrl(entry.loc),
       lastmod: entry.lastmod || new Date().toISOString()
     }))
+    .map((entry) => ({
+      ...entry,
+      loc: normalizeUrl(entry.loc)
+    }))
     .filter((entry) => {
-      if (!entry.loc || isLocalhostUrl(entry.loc) || seen.has(entry.loc)) return false;
+      if (!entry.loc || seen.has(entry.loc)) return false;
+      if (isLocalhostUrl(entry.loc)) return false;
+      if (normalizedBaseUrl && !entry.loc.startsWith(normalizedBaseUrl)) {
+        const absoluteUrl = normalizeUrl(entry.loc);
+        if (!absoluteUrl.startsWith("http://") && !absoluteUrl.startsWith("https://")) {
+          entry.loc = `${normalizedBaseUrl}${entry.loc.startsWith("/") ? entry.loc : `/${entry.loc}`}`;
+        }
+      }
       seen.add(entry.loc);
       return true;
     });

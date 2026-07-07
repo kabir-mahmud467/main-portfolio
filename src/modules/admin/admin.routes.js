@@ -4,8 +4,7 @@ import {
   renderAdminAnalytics,
   renderAdminDashboard,
   renderAdminMedia,
-  renderAdminSettings,
-  renderAdminTools
+  renderAdminSettings
 } from "./admin.controller.js";
 import {
   handleCreateCategory,
@@ -29,6 +28,15 @@ import {
   renderNewProject
 } from "../projects/projects.controller.js";
 import { projectIdParamRule, projectValidationRules } from "../projects/projects.validation.js";
+import {
+  handleCreateTool,
+  handleDeleteTool,
+  handleUpdateTool,
+  renderAdminTools,
+  renderEditTool,
+  renderNewTool
+} from "../tools/tools.controller.js";
+import { toolIdParamRule, toolValidationRules } from "../tools/tools.validation.js";
 
 export const adminRouter = Router();
 
@@ -51,6 +59,11 @@ adminRouter.get("/projects/:id/edit", projectIdParamRule, validateRequest, rende
 adminRouter.post("/projects/:id", projectIdParamRule, projectValidationRules, validateRequest, handleUpdateProject);
 adminRouter.post("/projects/:id/delete", projectIdParamRule, validateRequest, handleDeleteProject);
 adminRouter.get("/tools", renderAdminTools);
+adminRouter.get("/tools/new", renderNewTool);
+adminRouter.post("/tools", toolValidationRules, validateRequest, handleCreateTool);
+adminRouter.get("/tools/:id/edit", toolIdParamRule, validateRequest, renderEditTool);
+adminRouter.post("/tools/:id", toolIdParamRule, toolValidationRules, validateRequest, handleUpdateTool);
+adminRouter.post("/tools/:id/delete", toolIdParamRule, validateRequest, handleDeleteTool);
 adminRouter.get("/media", renderAdminMedia);
 adminRouter.get("/analytics", renderAdminAnalytics);
 adminRouter.get("/settings", renderAdminSettings);

@@ -7,6 +7,7 @@ const toolSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true, maxlength: 320 },
     category: { type: String, required: true, trim: true, index: true },
     icon: { type: String, default: null },
+    coverImage: { type: String, default: null },
     moduleKey: { type: String, required: true, trim: true },
     status: { type: String, enum: ["active", "inactive"], default: "active", index: true },
     usageCount: { type: Number, default: 0 },

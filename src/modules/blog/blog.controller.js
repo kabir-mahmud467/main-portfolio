@@ -2,6 +2,7 @@ import { buildMeta } from "../../core/utils/metaBuilder.js";
 import { appConfig } from "../../config/app.config.js";
 import { buildSitemapXml } from "../../core/utils/sitemap.js";
 import { Project } from "../projects/project.model.js";
+import { Tool } from "../tools/tool.model.js";
 import { toolDefinitions } from "../tools/tools.registry.js";
 import {
   addCategory,
@@ -191,27 +192,45 @@ export async function handleDeleteCategory(req, res, next) {
 
 export async function renderSitemap(req, res, next) {
   try {
-    const [urls, projects] = await Promise.all([
+    const requestedOrigin = `${req.protocol}://${req.get("host")}`;
+    const resolvedBaseUrl = (appConfig.url && !/^(https?:\/\/)?(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i.test(appConfig.url)
+      ? appConfig.url
+      : requestedOrigin);
+
+    const [blogResult, projectResult, toolResult] = await Promise.allSettled([
       getSitemapUrls(),
-      Project.find({ status: "published" }).select("slug updatedAt publishedAt").lean()
+      Project.find({ status: "published" }).select("slug updatedAt publishedAt").lean(),
+      Tool.find({ status: "active" }).select("slug updatedAt").lean()
     ]);
 
-    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/tools", "/privacy-policy", "/terms"].map((path) => ({
-      loc: `${appConfig.url}${path}`,
+    const urls = blogResult.status === "fulfilled" ? blogResult.value : [];
+    const projects = projectResult.status === "fulfilled" ? projectResult.value : [];
+    const dbTools = toolResult.status === "fulfilled" ? toolResult.value : [];
+
+    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/tools", "/privacy-policy", "/terms", "/terms-and-conditions", "/dmca"].map((path) => ({
+      loc: `${resolvedBaseUrl}${path}`,
       lastmod: new Date().toISOString()
     }));
     const projectUrls = projects
       .filter((project) => project?.slug)
       .map((project) => ({
-        loc: `${appConfig.url}/projects/${project.slug}`,
+        loc: `${resolvedBaseUrl}/projects/${project.slug}`,
         lastmod: (project.updatedAt || project.publishedAt || new Date()).toISOString()
       }));
-    const toolUrls = toolDefinitions.map((tool) => ({
-      loc: `${appConfig.url}${tool.route}`,
-      lastmod: new Date().toISOString()
-    }));
+    const toolUrls = [
+      ...dbTools
+        .filter((tool) => tool?.slug)
+        .map((tool) => ({
+          loc: `${resolvedBaseUrl}/tools/${tool.slug}`,
+          lastmod: (tool.updatedAt || new Date()).toISOString()
+        })),
+      ...toolDefinitions.map((tool) => ({
+        loc: `${resolvedBaseUrl}${tool.route}`,
+        lastmod: new Date().toISOString()
+      }))
+    ];
 
-    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, toolUrls });
+    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, toolUrls, baseUrl: resolvedBaseUrl });
     res.type("application/xml").send(xml);
   } catch (error) {
     next(error);
