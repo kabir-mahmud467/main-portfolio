@@ -62,7 +62,15 @@
   }
 
   .prose pre {
-    @apply mt-6;
+    @apply mt-6 overflow-x-auto rounded-xl border border-line/70 bg-ink p-4 text-sm leading-7 text-white shadow-soft;
+  }
+
+  .prose :where(code):not(pre code) {
+    @apply rounded bg-ink/10 px-1.5 py-0.5 font-semibold text-ink;
+  }
+
+  .prose pre code {
+    @apply block whitespace-pre-wrap break-words;
   }
 
   .prose img {

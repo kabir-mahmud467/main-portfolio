@@ -1,5 +1,6 @@
 import { buildMeta } from "../../core/utils/metaBuilder.js";
 import { appConfig } from "../../config/app.config.js";
+import { buildSitemapXml } from "../../core/utils/sitemap.js";
 import { Project } from "../projects/project.model.js";
 import { toolDefinitions } from "../tools/tools.registry.js";
 import {
@@ -190,24 +191,28 @@ export async function handleDeleteCategory(req, res, next) {
 
 export async function renderSitemap(req, res, next) {
   try {
-    const urls = await getSitemapUrls();
-    const projects = await Project.find({ status: "published" }).select("slug updatedAt").lean();
-    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/tools"].map((path) => ({
+    const [urls, projects] = await Promise.all([
+      getSitemapUrls(),
+      Project.find({ status: "published" }).select("slug updatedAt publishedAt").lean()
+    ]);
+
+    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/tools", "/privacy-policy", "/terms"].map((path) => ({
       loc: `${appConfig.url}${path}`,
       lastmod: new Date().toISOString()
     }));
-    const projectUrls = projects.map((project) => ({
-      loc: `${appConfig.url}/projects/${project.slug}`,
-      lastmod: project.updatedAt.toISOString()
-    }));
+    const projectUrls = projects
+      .filter((project) => project?.slug)
+      .map((project) => ({
+        loc: `${appConfig.url}/projects/${project.slug}`,
+        lastmod: (project.updatedAt || project.publishedAt || new Date()).toISOString()
+      }));
     const toolUrls = toolDefinitions.map((tool) => ({
       loc: `${appConfig.url}${tool.route}`,
       lastmod: new Date().toISOString()
     }));
-    res.type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...staticUrls, ...urls, ...projectUrls, ...toolUrls].map((url) => `<url><loc>${url.loc}</loc><lastmod>${url.lastmod}</lastmod></url>`).join("\n")}
-</urlset>`);
+
+    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, toolUrls });
+    res.type("application/xml").send(xml);
   } catch (error) {
     next(error);
   }

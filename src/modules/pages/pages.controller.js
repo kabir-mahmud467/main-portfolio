@@ -138,6 +138,26 @@ export function renderAboutPage(req, res) {
   });
 }
 
+export function renderPrivacyPage(req, res) {
+  res.render("pages/privacy", {
+    title: "Privacy Policy",
+    meta: buildMeta(req, {
+      title: "Privacy Policy",
+      description: "How this site uses cookies, analytics, and collected information to provide a better experience."
+    })
+  });
+}
+
+export function renderTermsPage(req, res) {
+  res.render("pages/terms", {
+    title: "Terms of Service",
+    meta: buildMeta(req, {
+      title: "Terms of Service",
+      description: "The terms for using this site, its content, and the free tools made available to visitors."
+    })
+  });
+}
+
 export function renderRobots(req, res) {
   res.type("text/plain").send(`User-agent: *
 Allow: /

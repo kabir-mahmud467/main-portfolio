@@ -12,7 +12,7 @@ function inlineMarkdown(value) {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/`(.+?)`/g, '<code class="rounded bg-ink/10 px-1 py-0.5">$1</code>')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a class="font-bold text-flame hover:text-ink" href="$2" rel="noopener">$1</a>');
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a class="font-bold text-flame hover:text-ink" href="$2" rel="noopener noreferrer">$1</a>');
 }
 
 export function renderMarkdown(markdown) {
@@ -35,7 +35,7 @@ export function renderMarkdown(markdown) {
       if (!inCode) {
         inCode = true;
         codeLang = codeFence[1] || "text";
-        html.push(`<pre class="overflow-auto rounded-lg bg-ink p-4 text-sm text-white"><code class="language-${escapeHtml(codeLang)}">`);
+        html.push(`<pre class="mt-6 overflow-auto rounded-xl border border-line/70 bg-ink p-4 text-sm leading-7 text-white shadow-soft"><code class="language-${escapeHtml(codeLang)}">`);
       } else {
         inCode = false;
         html.push("</code></pre>");
@@ -55,19 +55,19 @@ export function renderMarkdown(markdown) {
 
     if (line.startsWith("### ")) {
       flushParagraph();
-      html.push(`<h3>${inlineMarkdown(line.slice(4))}</h3>`);
+      html.push(`<h3 class="mt-8 text-2xl font-extrabold text-ink">${inlineMarkdown(line.slice(4))}</h3>`);
       continue;
     }
 
     if (line.startsWith("## ")) {
       flushParagraph();
-      html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
+      html.push(`<h2 class="mt-10 font-display text-3xl font-extrabold text-ink">${inlineMarkdown(line.slice(3))}</h2>`);
       continue;
     }
 
     if (line.startsWith("# ")) {
       flushParagraph();
-      html.push(`<h1>${inlineMarkdown(line.slice(2))}</h1>`);
+      html.push(`<h1 class="mt-10 font-display text-4xl font-extrabold text-ink">${inlineMarkdown(line.slice(2))}</h1>`);
       continue;
     }
 
