@@ -26,32 +26,40 @@ function normalizeToolPayload(body) {
 }
 
 export async function getToolsIndex() {
-  const dbTools = await findActiveTools();
-  const definitions = toolDefinitions.filter((tool) => !dbTools.some((entry) => entry.slug === tool.slug));
-  return [...dbTools, ...definitions];
+  try {
+    const dbTools = await findActiveTools();
+    const definitions = toolDefinitions.filter((tool) => !dbTools.some((entry) => entry.slug === tool.slug));
+    return [...dbTools, ...definitions];
+  } catch (error) {
+    return toolDefinitions;
+  }
 }
 
 export async function getToolPage(slug) {
-  const dbTool = await findToolBySlug(slug);
-  if (dbTool && dbTool.status === "active") {
-    return {
-      ...dbTool,
-      route: `/tools/${dbTool.slug}`,
-      view: "pages/tools/show",
-      seo: {
-        title: dbTool.seo?.title || dbTool.name,
-        description: dbTool.seo?.description || dbTool.description,
-        canonicalPath: `/tools/${dbTool.slug}`
-      },
-      schema: {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        name: dbTool.name,
-        applicationCategory: dbTool.category,
-        operatingSystem: "Any",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
-      }
-    };
+  try {
+    const dbTool = await findToolBySlug(slug);
+    if (dbTool && dbTool.status === "active") {
+      return {
+        ...dbTool,
+        route: `/tools/${dbTool.slug}`,
+        view: "pages/tools/show",
+        seo: {
+          title: dbTool.seo?.title || dbTool.name,
+          description: dbTool.seo?.description || dbTool.description,
+          canonicalPath: `/tools/${dbTool.slug}`
+        },
+        schema: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: dbTool.name,
+          applicationCategory: dbTool.category,
+          operatingSystem: "Any",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+        }
+      };
+    }
+  } catch (error) {
+    // Fall back to the built-in tool registry when the database is unavailable.
   }
 
   return getToolDefinition(slug);

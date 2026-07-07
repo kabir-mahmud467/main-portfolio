@@ -28,7 +28,7 @@ export async function renderToolsIndex(req, res, next) {
 
 export async function renderToolPage(req, res, next) {
   try {
-    const tool = getToolPage(req.params.slug);
+    const tool = await getToolPage(req.params.slug);
 
     if (!tool) {
       const error = new Error("Tool not found.");
