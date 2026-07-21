@@ -14,7 +14,7 @@
     "build:css": "tailwindcss -i ./src/public/css/tailwind.css -o ./src/public/css/main.css --minify",
     "start": "node src/server.js",
     "create-admin": "node scripts/create-admin.js",
-    "lint": "node --check src/server.js && node --check src/app.js && node --check api/index.js"
+    "lint": "node --check src/server.js && node --check src/app.js && node --check api/index.js && node --check src/config/app.config.js && node --check src/config/db.config.js && node --check src/config/security.config.js"
   },
   "keywords": [
     "portfolio",

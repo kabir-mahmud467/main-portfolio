@@ -16,7 +16,7 @@ const fallbackProjects = [
     title: "Developer Utilities",
     summary: "Free browser-first tools designed for quick everyday engineering workflows.",
     stack: ["EJS", "Tailwind", "Vanilla JS"],
-    href: "/tools"
+    href: "https://tools.kabirmahmud.xyz"
   },
   {
     title: "Technical Writing Hub",

@@ -207,7 +207,7 @@ export async function renderSitemap(req, res, next) {
     const projects = projectResult.status === "fulfilled" ? projectResult.value : [];
     const dbTools = toolResult.status === "fulfilled" ? toolResult.value : [];
 
-    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/tools", "/privacy-policy", "/terms", "/terms-and-conditions", "/dmca"].map((path) => ({
+    const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/privacy-policy", "/terms", "/dmca"].map((path) => ({
       loc: `${resolvedBaseUrl}${path}`,
       lastmod: new Date().toISOString()
     }));
@@ -221,11 +221,11 @@ export async function renderSitemap(req, res, next) {
       ...dbTools
         .filter((tool) => tool?.slug)
         .map((tool) => ({
-          loc: `${resolvedBaseUrl}/tools/${tool.slug}`,
+          loc: `https://tools.kabirmahmud.xyz/${tool.slug}`,
           lastmod: (tool.updatedAt || new Date()).toISOString()
         })),
       ...toolDefinitions.map((tool) => ({
-        loc: `${resolvedBaseUrl}${tool.route}`,
+        loc: `${tool.route}`,
         lastmod: new Date().toISOString()
       }))
     ];

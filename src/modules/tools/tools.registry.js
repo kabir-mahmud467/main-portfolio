@@ -19,18 +19,18 @@ export const toolDefinitions = [
   description,
   category,
   moduleKey: slug,
-  route: `/tools/${slug}`,
+  route: `https://tools.kabirmahmud.xyz/${slug}`,
   controller: `${slug}Controller`,
   view: `pages/tools/${slug}`,
   breadcrumb: [
     { label: "Home", href: "/" },
-    { label: "Tools", href: "/tools" },
-    { label: name, href: `/tools/${slug}` }
+    { label: "Tools", href: "https://tools.kabirmahmud.xyz" },
+    { label: name, href: `https://tools.kabirmahmud.xyz/${slug}` }
   ],
   seo: {
     title: `${name} | Free Online Tool`,
     description,
-    canonicalPath: `/tools/${slug}`
+    canonicalPath: `https://tools.kabirmahmud.xyz/${slug}`
   },
   schema: {
     "@context": "https://schema.org",

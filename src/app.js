@@ -10,7 +10,6 @@ import { contactRouter } from "./modules/contact/contact.routes.js";
 import { adminRouter } from "./modules/admin/admin.routes.js";
 import { blogRouter } from "./modules/blog/blog.routes.js";
 import { projectsRouter } from "./modules/projects/projects.routes.js";
-import { toolsRouter } from "./modules/tools/tools.routes.js";
 import { authRouter } from "./modules/auth/auth.routes.js";
 import { attachAuthenticatedUser } from "./core/middleware/auth.middleware.js";
 import { csrfProtection } from "./core/middleware/csrf.middleware.js";
@@ -50,7 +49,9 @@ app.use("/blog", blogRouter);
 app.get("/sitemap.xml", renderSitemap);
 app.get("/rss.xml", renderRss);
 app.use("/projects", projectsRouter);
-app.use("/tools", toolsRouter);
+app.use("/tools", (req, res) => {
+  res.redirect(301, `https://tools.kabirmahmud.xyz${req.path}`);
+});
 app.use("/contact", contactRouter);
 app.use("/admin", authRouter);
 app.use("/admin", adminRouter);
