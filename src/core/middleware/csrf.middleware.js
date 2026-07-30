@@ -4,6 +4,10 @@ import { securityConfig } from "../../config/security.config.js";
 const safeMethods = new Set(["GET", "HEAD", "OPTIONS"]);
 
 export function csrfProtection(req, res, next) {
+  if (!req.session) {
+    return next();
+  }
+
   if (!req.session.csrfToken) {
     req.session.csrfToken = createRawToken(32);
   }

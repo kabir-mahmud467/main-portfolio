@@ -1,41 +1,118 @@
 <section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
   <div>
-    <p class="text-sm font-bold uppercase tracking-wider text-flame">Project</p>
-    <h2 class="font-display text-3xl font-extrabold"><%= title %></h2>
+    <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Portfolio</p>
+    <h2 class="font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-[#f0f6fc]"><%= title %></h2>
   </div>
-  <a class="btn-secondary" href="/admin/projects">Back</a>
+  <a class="inline-flex items-center gap-2 rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] px-5 py-2.5 text-sm font-bold text-[#475569] dark:text-[#8b949e] shadow-sm transition-all hover:bg-[#faf9f6] dark:hover:bg-[#1c2128] hover:shadow-md" href="/admin/projects">
+    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+    Back to Projects
+  </a>
 </section>
 
-<form action="<%= action %>" method="post" class="mt-6 grid gap-6 lg:grid-cols-[1fr_24rem]">
+<form action="<%= action %>" method="post">
   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-  <div class="grid gap-5 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="title" value="<%= project?.title || '' %>" placeholder="Project title" required>
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="slug" value="<%= project?.slug || '' %>" placeholder="Slug">
-    <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="summary" placeholder="Summary" required><%= project?.summary || '' %></textarea>
-    <textarea class="focus-ring min-h-[24rem] rounded-md border border-line px-3 py-3 font-mono text-sm text-ink" name="description" placeholder="Markdown description" required><%= project?.description || '' %></textarea>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]">
+    <div class="grid gap-6">
+      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
+            <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" /></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc]">Project Details</h3>
+        </div>
+        <div class="grid gap-5">
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Title</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="title" value="<%= project?.title || '' %>" placeholder="Project title" required>
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Slug</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="slug" value="<%= project?.slug || '' %>" placeholder="auto-generated-from-title">
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Summary</label>
+            <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="summary" rows="3" placeholder="Brief project summary" required><%= project?.summary || '' %></textarea>
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Full Description (Markdown)</label>
+            <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm leading-7" name="description" rows="16" placeholder="Write a detailed description..." required><%= project?.description || '' %></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="grid gap-6 content-start">
+      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
+            <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc]">Settings</h3>
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Status</label>
+            <select class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="status">
+              <option value="draft" <%= project?.status === 'draft' ? 'selected' : '' %>>Draft</option>
+              <option value="published" <%= project?.status === 'published' ? 'selected' : '' %>>Published</option>
+            </select>
+          </div>
+          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-[#e2e8f0] dark:border-[#30363d] px-4 py-3 transition-all hover:bg-[#faf9f6] dark:hover:bg-[#1c2128]">
+            <input name="featured" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] focus:ring-[#7c3aed]/30" <%= project?.featured ? 'checked' : '' %>>
+            <span class="text-sm font-bold text-[#475569] dark:text-[#8b949e]">Featured project</span>
+          </label>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Order</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="order" type="number" value="<%= project?.order || 0 %>" placeholder="0">
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Cover Image URL</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="coverImage" value="<%= project?.coverImage || '' %>" placeholder="https://example.com/image.jpg">
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Tech Stack</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="techStack" value="<%= (project?.techStack || []).join(', ') %>" placeholder="Node.js, MongoDB, React">
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Categories</label>
+            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="categories" value="<%= (project?.categories || []).join(', ') %>" placeholder="SaaS, Portfolio">
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
+            <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m.002-3.502l1.757-1.757a4.5 4.5 0 016.364 0l4.5 4.5a4.5 4.5 0 010 6.364l-1.757 1.757" /></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc]">Links</h3>
+        </div>
+        <div class="grid gap-4">
+          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="github" value="<%= project?.links?.github || '' %>" placeholder="GitHub URL">
+          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="live" value="<%= project?.links?.live || '' %>" placeholder="Live demo URL">
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
+            <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
+          </div>
+          <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc]">SEO</h3>
+        </div>
+        <div class="grid gap-4">
+          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="seoTitle" value="<%= project?.seo?.title || '' %>" placeholder="SEO title">
+          <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="seoDescription" rows="3" placeholder="SEO description"><%= project?.seo?.description || '' %></textarea>
+          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="ogImage" value="<%= project?.seo?.ogImage || '' %>" placeholder="Open Graph image URL">
+          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="canonicalUrl" value="<%= project?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
+        </div>
+      </div>
+
+      <button class="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#6366f1] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#7c3aed]/20 transition-all hover:shadow-xl hover:shadow-[#7c3aed]/30" type="submit">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+        <%= submitLabel %>
+      </button>
+    </aside>
   </div>
-  <aside class="grid content-start gap-5">
-    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
-      <select class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="status">
-        <option value="draft" <%= project?.status === 'draft' ? 'selected' : '' %>>Draft</option>
-        <option value="published" <%= project?.status === 'published' ? 'selected' : '' %>>Published</option>
-      </select>
-      <label class="flex items-center gap-2 text-sm font-semibold"><input name="featured" type="checkbox" <%= project?.featured ? 'checked' : '' %>> Featured project</label>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="order" type="number" value="<%= project?.order || 0 %>" placeholder="Order">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="coverImage" value="<%= project?.coverImage || '' %>" placeholder="Cover image URL">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="gallery" value="<%= (project?.gallery || []).join(', ') %>" placeholder="Gallery image URLs">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="techStack" value="<%= (project?.techStack || []).join(', ') %>" placeholder="Node.js, MongoDB">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="categories" value="<%= (project?.categories || []).join(', ') %>" placeholder="SaaS, Portfolio">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="github" value="<%= project?.links?.github || '' %>" placeholder="GitHub link">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="live" value="<%= project?.links?.live || '' %>" placeholder="Live demo">
-    </div>
-    <div class="grid gap-4 rounded-lg border border-line bg-white p-5 dark:border-white/10 dark:bg-white/5">
-      <h3 class="font-bold">SEO</h3>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="seoTitle" value="<%= project?.seo?.title || '' %>" placeholder="SEO title">
-      <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="seoDescription" placeholder="SEO description"><%= project?.seo?.description || '' %></textarea>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="ogImage" value="<%= project?.seo?.ogImage || '' %>" placeholder="Open Graph image">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="canonicalUrl" value="<%= project?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
-    </div>
-    <button class="btn-primary w-full" type="submit"><%= submitLabel %></button>
-  </aside>
 </form>

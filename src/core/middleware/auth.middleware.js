@@ -6,22 +6,22 @@ import { hashToken } from "../utils/tokens.js";
 
 export async function attachAuthenticatedUser(req, res, next) {
   try {
-    // #region agent log
-    debugLog("auth.middleware.js:attachAuthenticatedUser", "auth attach entry", {
-      method: req.method,
-      path: req.originalUrl,
-      hasReqSecret: Boolean(req.secret),
-      hasSessionUserId: Boolean(req.session?.userId),
-      hasRememberCookieRaw: Boolean(req.cookies?.[securityConfig.rememberCookieName])
-    }, "H4");
-    // #endregion
-
     if (req.session?.userId) {
       req.user = await findUserById(req.session.userId);
       return next();
     }
 
-    const rememberToken = req.signedCookies?.[securityConfig.rememberCookieName];
+    let rememberToken = req.signedCookies?.[securityConfig.rememberCookieName];
+
+    if (!rememberToken) {
+      const rawCookie = req.cookies?.[securityConfig.rememberCookieName];
+      if (rawCookie && typeof rawCookie === "string" && rawCookie.startsWith("s:")) {
+        const result = req.unsignCookie(rawCookie);
+        if (result?.unsigned) {
+          rememberToken = result.value;
+        }
+      }
+    }
 
     if (!rememberToken) {
       return next();
@@ -40,13 +40,6 @@ export async function attachAuthenticatedUser(req, res, next) {
     await saveSession(req);
     return next();
   } catch (error) {
-    // #region agent log
-    debugLog("auth.middleware.js:attachAuthenticatedUser", "auth attach error", {
-      method: req.method,
-      path: req.originalUrl,
-      errorMessage: error.message
-    }, "H4");
-    // #endregion
     return next(error);
   }
 }

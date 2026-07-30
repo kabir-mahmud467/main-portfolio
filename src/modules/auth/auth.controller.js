@@ -125,12 +125,12 @@ export async function handleLogin(req, res) {
 
 export async function handleLogout(req, res, next) {
   try {
-    const rememberToken = req.signedCookies?.[securityConfig.rememberCookieName];
-    await logoutAdmin(req, rememberToken);
+    const rememberToken = req.signedCookies?.[securityConfig.rememberCookieName] || req.cookies?.[securityConfig.rememberCookieName];
     res.clearCookie(securityConfig.rememberCookieName);
+    await logoutAdmin(req, rememberToken);
     res.redirect("/admin/login");
   } catch (error) {
-    next(error);
+    res.redirect("/admin/login");
   }
 }
 

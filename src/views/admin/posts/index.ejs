@@ -1,41 +1,79 @@
 <section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
   <div>
-    <p class="text-sm font-bold uppercase tracking-wider text-flame">Publishing</p>
-    <h2 class="font-display text-3xl font-extrabold">Posts</h2>
+    <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Publishing</p>
+    <h2 class="font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-[#f0f6fc]">Posts</h2>
   </div>
-  <a class="btn-primary" href="/admin/posts/new">Create Post</a>
+  <a class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#6366f1] px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-[#7c3aed]/20 transition-all hover:shadow-xl hover:shadow-[#7c3aed]/30" href="/admin/posts/new">
+    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+    Create Post
+  </a>
 </section>
 
-<section class="mt-6 overflow-hidden rounded-lg border border-line bg-white shadow-sm dark:border-white/10 dark:bg-white/5">
+<section class="mt-6 overflow-hidden rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] shadow-sm">
   <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-line text-sm dark:divide-white/10">
-      <thead class="bg-paper text-left dark:bg-white/5">
+    <table class="min-w-full divide-y divide-[#e2e8f0] dark:divide-[#30363d] text-sm">
+      <thead class="bg-[#faf9f6] dark:bg-[#0d1117]">
         <tr>
-          <th class="px-4 py-3 font-bold">Title</th>
-          <th class="px-4 py-3 font-bold">Status</th>
-          <th class="px-4 py-3 font-bold">Featured</th>
-          <th class="px-4 py-3 font-bold">Reading</th>
-          <th class="px-4 py-3 font-bold">Actions</th>
+          <th class="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-[#8b949e]">Title</th>
+          <th class="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-[#8b949e]">Status</th>
+          <th class="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-[#8b949e]">Featured</th>
+          <th class="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-[#8b949e]">Reading</th>
+          <th class="px-5 py-4 text-right text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-[#8b949e]">Actions</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-line dark:divide-white/10">
+      <tbody class="divide-y divide-[#e2e8f0] dark:divide-[#30363d]">
         <% posts.forEach((post) => { %>
-          <tr>
-            <td class="px-4 py-3 font-semibold"><%= post.title %><p class="text-xs font-normal text-ink/55 dark:text-white/50">/<%= post.slug %></p></td>
-            <td class="px-4 py-3"><span class="rounded-md bg-ink/10 px-2 py-1 text-xs font-bold dark:bg-white/10"><%= post.status %></span></td>
-            <td class="px-4 py-3"><%= post.featured ? "Yes" : "No" %></td>
-            <td class="px-4 py-3"><%= post.readingTime %> min</td>
-            <td class="px-4 py-3">
-              <div class="flex gap-2">
-                <a class="btn-secondary px-3 py-2" href="/admin/posts/<%= post._id %>/edit">Edit</a>
-                <form action="/admin/posts/<%= post._id %>/delete" method="post">
+          <tr class="transition-colors hover:bg-[#faf9f6]/50 dark:hover:bg-[#1c2128]/50">
+            <td class="px-5 py-4">
+              <p class="font-bold text-[#1a1a2e] dark:text-[#f0f6fc]"><%= post.title %></p>
+              <p class="mt-0.5 text-xs text-[#94a3b8] dark:text-[#6e7681] font-mono">/<%= post.slug %></p>
+            </td>
+            <td class="px-5 py-4">
+              <span class="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold <%= post.status === 'published' ? 'bg-[#22c55e]/10 text-[#16a34a] dark:text-[#4ade80]' : 'bg-[#f59e0b]/10 text-[#d97706] dark:text-[#fbbf24]' %>">
+                <span class="h-1.5 w-1.5 rounded-full <%= post.status === 'published' ? 'bg-[#22c55e]' : 'bg-[#f59e0b]' %>"></span>
+                <%= post.status %>
+              </span>
+            </td>
+            <td class="px-5 py-4">
+              <% if (post.featured) { %>
+                <span class="text-[#7c3aed] dark:text-[#a78bfa]">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+                </span>
+              <% } else { %>
+                <span class="text-[#e2e8f0] dark:text-[#30363d]">—</span>
+              <% } %>
+            </td>
+            <td class="px-5 py-4 text-sm text-[#64748b] dark:text-[#8b949e]"><%= post.readingTime %> min</td>
+            <td class="px-5 py-4 text-right">
+              <div class="flex items-center justify-end gap-2">
+                <a class="inline-flex items-center gap-1.5 rounded-lg border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] px-3.5 py-2 text-xs font-bold text-[#475569] dark:text-[#8b949e] transition-all hover:bg-[#7c3aed]/5 hover:border-[#7c3aed]/30" href="/admin/posts/<%= post._id %>/edit">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                  Edit
+                </a>
+                <form action="/admin/posts/<%= post._id %>/delete" method="post" class="inline" onsubmit="return confirm('Delete this post?')">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                  <button class="rounded-md border border-flame/30 px-3 py-2 text-sm font-bold text-flame" type="submit">Delete</button>
+                  <button class="inline-flex items-center gap-1.5 rounded-lg border border-[#ef4444]/30 bg-white dark:bg-[#161b22] px-3.5 py-2 text-xs font-bold text-[#ef4444] transition-all hover:bg-[#ef4444]/5" type="submit">
+                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+                    Delete
+                  </button>
                 </form>
               </div>
             </td>
           </tr>
         <% }) %>
+        <% if (!posts.length) { %>
+          <tr>
+            <td colspan="5" class="px-5 py-16 text-center">
+              <div class="flex flex-col items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7c3aed]/10">
+                  <svg class="h-6 w-6 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                </div>
+                <p class="text-sm font-bold text-[#64748b] dark:text-[#8b949e]">No posts yet</p>
+                <a href="/admin/posts/new" class="text-sm font-bold text-[#7c3aed] dark:text-[#a78bfa] hover:underline">Create your first post</a>
+              </div>
+            </td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
   </div>

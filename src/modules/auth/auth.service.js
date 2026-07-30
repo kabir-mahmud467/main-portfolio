@@ -5,6 +5,7 @@ import { hashPassword, verifyPassword } from "../../core/utils/password.js";
 import { createRawToken, hashToken } from "./../../core/utils/tokens.js";
 import {
   findUserByEmail,
+  findUserByRememberTokenHash,
   findUserByResetTokenHash
 } from "./auth.repository.js";
 
@@ -72,9 +73,9 @@ export async function loginAdmin(req, { email, password, remember, next }) {
 
 export async function logoutAdmin(req, rememberToken) {
   if (rememberToken) {
-    const user = await findUserByEmail(req.user?.email || "");
+    const tokenHash = hashToken(rememberToken);
+    const user = await findUserByRememberTokenHash(tokenHash);
     if (user) {
-      const tokenHash = hashToken(rememberToken);
       user.rememberTokens = user.rememberTokens.filter((item) => item.tokenHash !== tokenHash);
       await user.save();
     }

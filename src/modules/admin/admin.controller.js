@@ -2,9 +2,7 @@ import { buildMeta } from "../../core/utils/metaBuilder.js";
 import { Post } from "../blog/blog.model.js";
 import { Category } from "../blog/category.model.js";
 import { Project } from "../projects/project.model.js";
-import { Tool } from "../tools/tool.model.js";
 import { ContactMessage } from "../contact/contact.model.js";
-import { Media } from "../media/media.model.js";
 
 export async function renderAdminDashboard(req, res, next) {
   try {
@@ -12,18 +10,16 @@ export async function renderAdminDashboard(req, res, next) {
     const thirtyDaysAgo = new Date(now - 30 * 24 * 60 * 60 * 1000);
 
     const [
-      posts, drafts, categories, projects, tools, newMessages,
-      totalMessages, totalMedia, recentPosts, recentMessages,
+      posts, drafts, categories, projects, newMessages,
+      totalMessages, recentPosts, recentMessages,
       postsLast30, messagesLast30, totalViews
     ] = await Promise.all([
       Post.countDocuments({ status: "published" }),
       Post.countDocuments({ status: "draft" }),
       Category.countDocuments({ type: "blog" }),
       Project.countDocuments(),
-      Tool.countDocuments(),
       ContactMessage.countDocuments({ status: "new" }),
       ContactMessage.countDocuments(),
-      Media.countDocuments(),
       Post.find({ status: "published" }).sort({ publishedAt: -1 }).limit(5).select("title slug publishedAt views").lean(),
       ContactMessage.find().sort({ createdAt: -1 }).limit(5).select("name subject createdAt status").lean(),
       Post.countDocuments({ status: "published", publishedAt: { $gte: thirtyDaysAgo } }),
@@ -36,16 +32,14 @@ export async function renderAdminDashboard(req, res, next) {
     res.render("admin/dashboard", {
       layout: "layouts/admin",
       title: "Admin Dashboard",
-      meta: buildMeta(req, { title: "Admin Dashboard", description: "Administrative dashboard for managing content, projects, tools, and platform settings.", noIndex: true }),
+      meta: buildMeta(req, { title: "Admin Dashboard", description: "Administrative dashboard for managing content, projects, and platform settings.", noIndex: true }),
       stats: [
         { label: "Published Posts", value: posts, change: postsLast30, icon: "posts" },
         { label: "Drafts", value: drafts, icon: "draft" },
         { label: "Total Views", value: viewCount, icon: "views" },
         { label: "Categories", value: categories, icon: "categories" },
         { label: "Projects", value: projects, icon: "projects" },
-        { label: "Tools", value: tools, icon: "tools" },
-        { label: "New Messages", value: newMessages, total: totalMessages, icon: "messages" },
-        { label: "Media Files", value: totalMedia, icon: "media" }
+        { label: "New Messages", value: newMessages, total: totalMessages, icon: "messages" }
       ],
       recentPosts,
       recentMessages
@@ -71,28 +65,19 @@ export function renderAdminProjects(req, res) {
   });
 }
 
-export function renderAdminTools(req, res) {
-  renderAdminSection(req, res, {
-    title: "Tools",
-    description: "Manage free online tools, categories, status, usage counters, and SEO landing pages."
-  });
-}
-
 export async function renderAdminAnalytics(req, res) {
   const now = new Date();
   const thirtyDaysAgo = new Date(now - 30 * 24 * 60 * 60 * 1000);
 
   const [
-    totalPosts, totalProjects, totalTools,
-    totalMessages, totalMedia,
+    totalPosts, totalProjects,
+    totalMessages,
     postsLast30, messagesLast30,
     messageStatusCounts, totalViews
   ] = await Promise.all([
     Post.countDocuments({ status: "published" }),
     Project.countDocuments({ status: "published" }),
-    Tool.countDocuments({ status: "active" }),
     ContactMessage.countDocuments(),
-    Media.countDocuments(),
     Post.countDocuments({ publishedAt: { $gte: thirtyDaysAgo } }),
     ContactMessage.countDocuments({ createdAt: { $gte: thirtyDaysAgo } }),
     ContactMessage.aggregate([{ $group: { _id: "$status", count: { $sum: 1 } } }]),
@@ -112,9 +97,7 @@ export async function renderAdminAnalytics(req, res) {
     metrics: {
       totalPosts,
       totalProjects,
-      totalTools,
       totalMessages,
-      totalMedia,
       totalViews: viewCount,
       postsLast30,
       messagesLast30,
