@@ -2,9 +2,7 @@ import { Router } from "express";
 import { requireAuth, requireRole } from "../../core/middleware/auth.middleware.js";
 import {
   renderAdminAnalytics,
-  renderAdminDashboard,
-  renderAdminMedia,
-  renderAdminSettings
+  renderAdminDashboard
 } from "./admin.controller.js";
 import {
   handleCreateCategory,
@@ -37,6 +35,8 @@ import {
   renderNewTool
 } from "../tools/tools.controller.js";
 import { toolIdParamRule, toolValidationRules } from "../tools/tools.validation.js";
+import { mediaRouter } from "../media/media.routes.js";
+import { settingsRouter } from "../settings/settings.routes.js";
 
 export const adminRouter = Router();
 
@@ -64,6 +64,6 @@ adminRouter.post("/tools", toolValidationRules, validateRequest, handleCreateToo
 adminRouter.get("/tools/:id/edit", toolIdParamRule, validateRequest, renderEditTool);
 adminRouter.post("/tools/:id", toolIdParamRule, toolValidationRules, validateRequest, handleUpdateTool);
 adminRouter.post("/tools/:id/delete", toolIdParamRule, validateRequest, handleDeleteTool);
-adminRouter.get("/media", renderAdminMedia);
+adminRouter.use("/media", mediaRouter);
 adminRouter.get("/analytics", renderAdminAnalytics);
-adminRouter.get("/settings", renderAdminSettings);
+adminRouter.use("/settings", settingsRouter);

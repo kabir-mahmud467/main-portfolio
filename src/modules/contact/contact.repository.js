@@ -1,5 +1,1 @@
-import { ContactMessage } from "./contact.model.js";
-
-export function createContactMessage(payload) {
-  return ContactMessage.create(payload);
-}
+// Contact repository is unused — contact uses mailto:talk@kabirmahmud.xyz

@@ -2,7 +2,7 @@ import { promisify } from "node:util";
 import { appConfig } from "../../config/app.config.js";
 import { securityConfig } from "../../config/security.config.js";
 import { hashPassword, verifyPassword } from "../../core/utils/password.js";
-import { createRawToken, hashToken } from "../../core/utils/tokens.js";
+import { createRawToken, hashToken } from "./../../core/utils/tokens.js";
 import {
   findUserByEmail,
   findUserByResetTokenHash
@@ -53,7 +53,6 @@ export async function loginAdmin(req, { email, password, remember, next }) {
   await regenerateSession(req);
   req.session.userId = user._id.toString();
   req.session.role = user.role;
-  req.session.csrfToken = createRawToken(32);
 
   let rememberToken = null;
   if (remember) {
@@ -96,7 +95,13 @@ export async function requestPasswordReset(email) {
   user.resetPasswordExpiresAt = new Date(Date.now() + 60 * 60 * 1000);
   await user.save();
 
-  return `${appConfig.url}/admin/reset-password/${rawToken}`;
+  const resetLink = `${appConfig.url}/admin/reset-password/${rawToken}`;
+
+  if (!appConfig.isProduction) {
+    console.info(`Password reset link: ${resetLink}`);
+  }
+
+  return resetLink;
 }
 
 export async function resetPassword({ token, password }) {

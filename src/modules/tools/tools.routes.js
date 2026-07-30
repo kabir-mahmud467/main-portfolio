@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { createToolPageController, renderToolPage, renderToolsIndex } from "./tools.controller.js";
-import { toolDefinitions } from "./tools.registry.js";
+import { renderToolsIndex } from "./tools.controller.js";
 
 export const toolsRouter = Router();
 
 toolsRouter.get("/", renderToolsIndex);
-
-toolDefinitions.forEach((tool) => {
-  toolsRouter.get(`/${tool.slug}`, createToolPageController(tool.slug));
+toolsRouter.get("/:slug", (req, res) => {
+  res.redirect(301, `https://tools.kabirmahmud.xyz/${req.params.slug}`);
 });
-toolsRouter.get("/:slug", renderToolPage);
