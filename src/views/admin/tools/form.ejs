@@ -8,29 +8,29 @@
 
 <form action="<%= action %>" method="post" class="mt-6 grid gap-6 lg:grid-cols-[1fr_24rem]">
   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-  <div class="grid gap-5 rounded-lg border border-line bg-white p-5">
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="name" value="<%= tool?.name || '' %>" placeholder="Tool name" required>
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="slug" value="<%= tool?.slug || '' %>" placeholder="Slug">
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="category" value="<%= tool?.category || '' %>" placeholder="Category" required>
-    <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="description" placeholder="Tool description" required><%= tool?.description || '' %></textarea>
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="icon" value="<%= tool?.icon || '' %>" placeholder="Icon name or emoji">
-    <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="moduleKey" value="<%= tool?.moduleKey || '' %>" placeholder="Module key">
+  <div class="glass-card grid gap-5 p-5">
+    <input class="glass-input min-h-11" name="name" value="<%= tool?.name || '' %>" placeholder="Tool name" required>
+    <input class="glass-input min-h-11" name="slug" value="<%= tool?.slug || '' %>" placeholder="Slug">
+    <input class="glass-input min-h-11" name="category" value="<%= tool?.category || '' %>" placeholder="Category" required>
+    <textarea class="glass-input min-h-24" name="description" placeholder="Tool description" required><%= tool?.description || '' %></textarea>
+    <input class="glass-input min-h-11" name="icon" value="<%= tool?.icon || '' %>" placeholder="Icon name or emoji">
+    <input class="glass-input min-h-11" name="moduleKey" value="<%= tool?.moduleKey || '' %>" placeholder="Module key">
   </div>
   <aside class="grid content-start gap-5">
-    <div class="grid gap-4 rounded-lg border border-line bg-white p-5">
-      <select class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="status">
+    <div class="glass-card grid gap-4 p-5">
+      <select class="glass-input min-h-11" name="status">
         <option value="active" <%= tool?.status === 'active' ? 'selected' : '' %>>Active</option>
         <option value="inactive" <%= tool?.status === 'inactive' ? 'selected' : '' %>>Inactive</option>
       </select>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="usageCount" type="number" value="<%= tool?.usageCount || 0 %>" placeholder="Usage count">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="coverImage" value="<%= tool?.coverImage || '' %>" placeholder="Cover image URL">
+      <input class="glass-input min-h-11" name="usageCount" type="number" value="<%= tool?.usageCount || 0 %>" placeholder="Usage count">
+      <input class="glass-input min-h-11" name="coverImage" value="<%= tool?.coverImage || '' %>" placeholder="Cover image URL">
     </div>
-    <div class="grid gap-4 rounded-lg border border-line bg-white p-5">
+    <div class="glass-card grid gap-4 p-5">
       <h3 class="font-bold">SEO</h3>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="seoTitle" value="<%= tool?.seo?.title || '' %>" placeholder="SEO title">
-      <textarea class="focus-ring min-h-24 rounded-md border border-line px-3 py-3 text-ink" name="seoDescription" placeholder="SEO description"><%= tool?.seo?.description || '' %></textarea>
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="ogImage" value="<%= tool?.seo?.ogImage || '' %>" placeholder="Open Graph image">
-      <input class="focus-ring min-h-11 rounded-md border border-line px-3 text-ink" name="canonicalUrl" value="<%= tool?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
+      <input class="glass-input min-h-11" name="seoTitle" value="<%= tool?.seo?.title || '' %>" placeholder="SEO title">
+      <textarea class="glass-input min-h-24" name="seoDescription" placeholder="SEO description"><%= tool?.seo?.description || '' %></textarea>
+      <input class="glass-input min-h-11" name="ogImage" value="<%= tool?.seo?.ogImage || '' %>" placeholder="Open Graph image">
+      <input class="glass-input min-h-11" name="canonicalUrl" value="<%= tool?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
       <label class="flex items-center gap-2 text-sm font-semibold"><input name="noIndex" type="checkbox" <%= tool?.seo?.noIndex ? 'checked' : '' %>> No index</label>
     </div>
     <button class="btn-primary w-full" type="submit"><%= submitLabel %></button>

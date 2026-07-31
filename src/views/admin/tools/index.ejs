@@ -1,25 +1,25 @@
 <section class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
   <div>
-    <p class="text-sm font-bold uppercase tracking-wider text-flame">Tools</p>
-    <h2 class="font-display text-3xl font-extrabold">Manage tools</h2>
+    <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Tools</p>
+    <h2 class="font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-[#f0f6fc]">Manage tools</h2>
   </div>
   <a class="btn-primary" href="/admin/tools/new">Create Tool</a>
 </section>
 
 <section class="mt-6 grid gap-4">
   <% tools.forEach((tool) => { %>
-    <article class="rounded-lg border border-line bg-white p-5 shadow-sm">
+    <article class="glass-card p-5">
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h3 class="text-xl font-extrabold"><%= tool.name %></h3>
-          <p class="mt-1 text-sm text-ink/60">/<%= tool.slug %> · <%= tool.category %> · <%= tool.status %></p>
-          <p class="mt-3 max-w-2xl text-sm leading-6 text-ink/70"><%= tool.description %></p>
+          <p class="mt-1 text-sm text-[#64748b] dark:text-[#8b949e]">/<%= tool.slug %> · <%= tool.category %> · <%= tool.status %></p>
+          <p class="mt-3 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#8b949e]"><%= tool.description %></p>
         </div>
         <div class="flex gap-2">
           <a class="btn-secondary" href="/admin/tools/<%= tool._id %>/edit">Edit</a>
           <form action="/admin/tools/<%= tool._id %>/delete" method="post">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="rounded-md border border-flame/30 px-4 py-3 text-sm font-bold text-flame" type="submit">Delete</button>
+            <button class="rounded-xl border border-[#ef4444]/30 bg-white/60 px-4 py-2.5 text-sm font-bold text-[#ef4444] backdrop-blur-md transition-all hover:bg-[#ef4444]/10 dark:bg-white/10" type="submit">Delete</button>
           </form>
         </div>
       </div>

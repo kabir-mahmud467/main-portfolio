@@ -1,4 +1,4 @@
-<section class="rounded-lg border border-line bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+<section class="glass-card p-6">
   <div class="flex items-center justify-between">
     <div>
       <p class="text-sm font-bold uppercase tracking-wider text-flame">Assets</p>
@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <form action="/admin/media/upload" method="post" enctype="multipart/form-data" class="mt-6 flex items-end gap-4 rounded-lg border border-dashed border-line bg-paper p-5 dark:border-white/10 dark:bg-white/5">
+  <form action="/admin/media/upload" method="post" enctype="multipart/form-data" class="mt-6 flex items-end gap-4 glass-card rounded-2xl border-dashed p-5">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <div class="flex-1">
       <label for="file" class="mb-1 block text-sm font-semibold">Upload File</label>
@@ -20,7 +20,7 @@
   <% if (media.length) { %>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <% media.forEach((item) => { %>
-        <article class="group relative overflow-hidden rounded-lg border border-line bg-paper dark:border-white/10 dark:bg-white/5">
+        <article class="group relative overflow-hidden glass-card rounded-xl">
           <div class="aspect-video overflow-hidden bg-ink/5 dark:bg-white/10">
             <% if (item.type === 'image') { %>
               <img src="<%= item.thumbnailUrl || item.url %>" alt="<%= item.alt || item.originalName %>" class="h-full w-full object-cover" loading="lazy">
@@ -41,7 +41,7 @@
             <form id="alt-form-<%= item._id %>" action="/admin/media/<%= item._id %>/alt" method="post" class="mt-2 hidden">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <div class="flex gap-2">
-                <input type="text" name="alt" value="<%= item.alt %>" placeholder="Alt text" class="flex-1 rounded border border-line px-2 py-1 text-xs dark:border-white/10 dark:bg-white/5">
+                <input type="text" name="alt" value="<%= item.alt %>" placeholder="Alt text" class="glass-input flex-1 !py-1.5 text-xs">
                 <button class="rounded bg-ocean px-2 py-1 text-xs text-white">Save</button>
               </div>
             </form>
@@ -50,7 +50,7 @@
       <% }) %>
     </div>
   <% } else { %>
-    <div class="mt-8 rounded-lg border border-dashed border-line p-12 text-center dark:border-white/10">
+    <div class="mt-8 glass-card rounded-2xl border-dashed p-12 text-center">
       <p class="text-lg font-semibold text-ink/40 dark:text-white/40">No media yet</p>
       <p class="mt-1 text-sm text-ink/30 dark:text-white/30">Upload images to use them in your content.</p>
     </div>

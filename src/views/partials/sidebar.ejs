@@ -1,22 +1,22 @@
 <aside
   data-admin-sidebar
-  class="fixed inset-y-0 left-0 z-40 w-72 -translate-x-full border-r border-white/10 bg-ink p-5 text-white transition-transform lg:static lg:translate-x-0"
+  class="fixed inset-y-0 left-0 z-40 w-72 -translate-x-full border-r border-white/40 bg-white/50 p-5 text-[#1a1a2e] backdrop-blur-2xl transition-transform dark:border-white/10 dark:bg-[#0d1117]/70 dark:text-white lg:static lg:translate-x-0"
 >
   <a href="/admin" class="focus-ring block rounded-md font-display text-xl font-extrabold">
-    Kabir Admin
+    <span class="bg-gradient-to-r from-[#7c3aed] to-[#6366f1] bg-clip-text text-transparent">Kabir Admin</span>
   </a>
-  <p class="mt-2 text-sm text-white/60">Content, projects, and settings.</p>
+  <p class="mt-2 text-sm text-ink/60 dark:text-white/60">Content, projects, and settings.</p>
 
   <nav class="mt-8 grid gap-2" aria-label="Admin navigation">
-    <a class="rounded-md <%= currentPath === '/admin' ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin">Dashboard</a>
-    <a class="rounded-md <%= currentPath.startsWith('/admin/posts') ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin/posts">Posts</a>
-    <a class="rounded-md <%= currentPath.startsWith('/admin/projects') ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin/projects">Projects</a>
-    <a class="rounded-md <%= currentPath.startsWith('/admin/categories') ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin/categories">Categories</a>
-    <a class="rounded-md <%= currentPath.startsWith('/admin/analytics') ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin/analytics">Analytics</a>
-    <a class="rounded-md <%= currentPath.startsWith('/admin/settings') ? 'bg-white/10 text-white' : 'text-white/75' %> px-3 py-2 text-sm font-semibold hover:bg-white/10 hover:text-white" href="/admin/settings">Settings</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath === '/admin' ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin">Dashboard</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath.startsWith('/admin/posts') ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin/posts">Posts</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath.startsWith('/admin/projects') ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin/projects">Projects</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath.startsWith('/admin/categories') ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin/categories">Categories</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath.startsWith('/admin/analytics') ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin/analytics">Analytics</a>
+    <a class="rounded-xl px-3 py-2.5 text-sm font-semibold transition-all <%= currentPath.startsWith('/admin/settings') ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-[#7c3aed]/25' : 'text-ink/70 hover:bg-white/70 hover:text-[#7c3aed] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white' %>" href="/admin/settings">Settings</a>
   </nav>
   <form action="/admin/logout" method="post" class="mt-8">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    <button class="w-full rounded-md border border-white/10 px-3 py-2 text-left text-sm font-semibold text-white/75 hover:bg-white/10 hover:text-white" type="submit">Logout</button>
+    <button class="w-full rounded-xl border border-[#ef4444]/30 px-3 py-2.5 text-left text-sm font-semibold text-[#ef4444] transition-all hover:bg-[#ef4444]/10" type="submit">Logout</button>
   </form>
 </aside>

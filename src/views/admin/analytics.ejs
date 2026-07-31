@@ -1,6 +1,6 @@
 <!-- Main Metrics Grid -->
 <section class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-  <article class="group rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
+  <article class="group glass-card p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
     <div class="flex items-center justify-between">
       <p class="text-sm font-bold text-[#64748b] dark:text-[#8b949e]">Published Posts</p>
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
@@ -17,7 +17,7 @@
     </div>
   </article>
 
-  <article class="group rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
+  <article class="group glass-card p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
     <div class="flex items-center justify-between">
       <p class="text-sm font-bold text-[#64748b] dark:text-[#8b949e]">Live Projects</p>
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
@@ -28,7 +28,7 @@
     <p class="mt-2 text-xs text-[#94a3b8] dark:text-[#6e7681]">published and live</p>
   </article>
 
-  <article class="group rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
+  <article class="group glass-card p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
     <div class="flex items-center justify-between">
       <p class="text-sm font-bold text-[#64748b] dark:text-[#8b949e]">Total Views</p>
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
@@ -39,7 +39,7 @@
     <p class="mt-2 text-xs text-[#94a3b8] dark:text-[#6e7681]">across all posts</p>
   </article>
 
-  <article class="group rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
+  <article class="group glass-card p-6 shadow-sm transition-all hover:shadow-md hover:border-[#7c3aed]/20 dark:hover:border-[#7c3aed]/40">
     <div class="flex items-center justify-between">
       <p class="text-sm font-bold text-[#64748b] dark:text-[#8b949e]">Messages</p>
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
@@ -59,7 +59,7 @@
 <!-- Charts & Breakdowns -->
 <section class="mt-8 grid gap-6 lg:grid-cols-2">
   <!-- Messages Breakdown -->
-  <article class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+  <article class="glass-card p-6 shadow-sm">
     <div class="flex items-center gap-3 mb-6">
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
         <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
@@ -109,7 +109,7 @@
   </article>
 
   <!-- Top Posts -->
-  <article class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+  <article class="glass-card p-6 shadow-sm">
     <div class="flex items-center gap-3 mb-6">
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
         <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
@@ -120,7 +120,7 @@
       <div class="grid gap-3">
         <% var maxViews = Math.max(...topPosts.map(function(p) { return p.views; }), 1); %>
         <% topPosts.forEach(function(post, i) { %>
-          <div class="group rounded-xl bg-[#faf9f6] dark:bg-[#0d1117] px-4 py-3.5 transition-all hover:bg-[#7c3aed]/5 dark:hover:bg-[#7c3aed]/[0.08]">
+          <div class="group rounded-xl bg-white/60 dark:bg-white/[0.07] px-4 py-3.5 transition-all hover:bg-[#7c3aed]/5 dark:hover:bg-[#7c3aed]/[0.08]">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3 min-w-0 flex-1">
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#6366f1] text-xs font-bold text-white"><%= i + 1 %></span>
@@ -154,7 +154,7 @@
 
 <!-- Growth Indicators -->
 <section class="mt-8">
-  <article class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+  <article class="glass-card p-6 shadow-sm">
     <div class="flex items-center gap-3 mb-6">
       <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
         <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>

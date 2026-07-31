@@ -3,7 +3,7 @@
     <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Blog</p>
     <h2 class="font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-[#f0f6fc]"><%= title %></h2>
   </div>
-  <a class="inline-flex items-center gap-2 rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] px-5 py-2.5 text-sm font-bold text-[#475569] dark:text-[#8b949e] shadow-sm transition-all hover:bg-[#faf9f6] dark:hover:bg-[#1c2128] hover:shadow-md" href="/admin/posts">
+  <a class="glass-card px-5 py-2.5 text-sm font-bold text-[#475569] dark:text-[#8b949e]" href="/admin/posts">
     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
     Back to Posts
   </a>
@@ -14,7 +14,7 @@
 
   <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]">
     <div class="grid gap-6">
-      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+      <div class="glass-card p-6 shadow-sm">
         <div class="flex items-center gap-3 mb-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
             <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
@@ -24,15 +24,15 @@
         <div class="grid gap-5">
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Title</label>
-            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="title" value="<%= post?.title || '' %>" placeholder="Enter post title" required>
+            <input class="glass-input" name="title" value="<%= post?.title || '' %>" placeholder="Enter post title" required>
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Slug</label>
-            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="slug" value="<%= post?.slug || '' %>" placeholder="auto-generated-from-title">
+            <input class="glass-input font-mono text-sm" name="slug" value="<%= post?.slug || '' %>" placeholder="auto-generated-from-title">
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Excerpt</label>
-            <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="excerpt" rows="3" placeholder="Brief summary of the post" required><%= post?.excerpt || '' %></textarea>
+            <textarea class="glass-input" name="excerpt" rows="3" placeholder="Brief summary of the post" required><%= post?.excerpt || '' %></textarea>
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Content Format</label>
@@ -47,14 +47,14 @@
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Post Content</label>
-            <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm leading-7" name="content" rows="20" placeholder="Write your content here..."><%= post?.content || '' %></textarea>
+            <textarea class="glass-input font-mono text-sm leading-7" name="content" rows="20" placeholder="Write your content here..."><%= post?.content || '' %></textarea>
           </div>
         </div>
       </div>
     </div>
 
     <aside class="grid gap-6 content-start">
-      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+      <div class="glass-card p-6 shadow-sm">
         <div class="flex items-center gap-3 mb-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
             <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -64,31 +64,31 @@
         <div class="grid gap-4">
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Status</label>
-            <select class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="status">
+            <select class="glass-input" name="status">
               <option value="draft" <%= post?.status === 'draft' ? 'selected' : '' %>>Draft</option>
               <option value="published" <%= post?.status === 'published' ? 'selected' : '' %>>Published</option>
             </select>
           </div>
-          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-[#e2e8f0] dark:border-[#30363d] px-4 py-3 transition-all hover:bg-[#faf9f6] dark:hover:bg-[#1c2128]">
+          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-white/70 bg-white/50 px-4 py-3 backdrop-blur-md transition-all hover:bg-white/80 dark:border-white/10 dark:bg-white/[0.06] dark:hover:bg-white/10">
             <input name="featured" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] focus:ring-[#7c3aed]/30" <%= post?.featured ? 'checked' : '' %>>
             <span class="text-sm font-bold text-[#475569] dark:text-[#8b949e]">Featured post</span>
           </label>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Categories</label>
-            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="categories" value="<%= (post?.categories || []).join(', ') %>" placeholder="Architecture, Node.js">
+            <input class="glass-input" name="categories" value="<%= (post?.categories || []).join(', ') %>" placeholder="Architecture, Node.js">
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Tags</label>
-            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="express, mongodb">
+            <input class="glass-input" name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="express, mongodb">
           </div>
           <div>
             <label class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e]">Cover Image URL</label>
-            <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="coverImage" value="<%= post?.coverImage || '' %>" placeholder="https://example.com/image.jpg">
+            <input class="glass-input font-mono text-sm" name="coverImage" value="<%= post?.coverImage || '' %>" placeholder="https://example.com/image.jpg">
           </div>
         </div>
       </div>
 
-      <div class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+      <div class="glass-card p-6 shadow-sm">
         <div class="flex items-center gap-3 mb-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6366f1]/10">
             <svg class="h-5 w-5 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>
@@ -96,11 +96,11 @@
           <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc]">SEO</h3>
         </div>
         <div class="grid gap-4">
-          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="seoTitle" value="<%= post?.seo?.title || '' %>" placeholder="SEO title">
-          <textarea class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10" name="seoDescription" rows="3" placeholder="SEO description"><%= post?.seo?.description || '' %></textarea>
-          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="ogImage" value="<%= post?.seo?.ogImage || '' %>" placeholder="Open Graph image URL">
-          <input class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#0d1117] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] placeholder-[#94a3b8] dark:placeholder-[#6e7681] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10 font-mono text-sm" name="canonicalUrl" value="<%= post?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
-          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-[#e2e8f0] dark:border-[#30363d] px-4 py-3 transition-all hover:bg-[#faf9f6] dark:hover:bg-[#1c2128]">
+          <input class="glass-input" name="seoTitle" value="<%= post?.seo?.title || '' %>" placeholder="SEO title">
+          <textarea class="glass-input" name="seoDescription" rows="3" placeholder="SEO description"><%= post?.seo?.description || '' %></textarea>
+          <input class="glass-input font-mono text-sm" name="ogImage" value="<%= post?.seo?.ogImage || '' %>" placeholder="Open Graph image URL">
+          <input class="glass-input font-mono text-sm" name="canonicalUrl" value="<%= post?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
+          <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-white/70 bg-white/50 px-4 py-3 backdrop-blur-md transition-all hover:bg-white/80 dark:border-white/10 dark:bg-white/[0.06] dark:hover:bg-white/10">
             <input name="noIndex" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] focus:ring-[#7c3aed]/30" <%= post?.seo?.noIndex ? 'checked' : '' %>>
             <span class="text-sm font-bold text-[#475569] dark:text-[#8b949e]">No index</span>
           </label>

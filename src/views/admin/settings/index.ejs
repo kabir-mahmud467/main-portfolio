@@ -1,11 +1,11 @@
-<section class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] p-6 shadow-sm">
+<section class="glass-card p-6 shadow-sm">
   <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Configuration</p>
   <h2 class="mt-2 font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-[#f0f6fc]">Settings</h2>
   <p class="mt-3 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#8b949e]">Configure site metadata, social profiles, email credentials, and platform behavior.</p>
 
   <div class="mt-8 grid gap-8">
     <% sections.forEach((group) => { %>
-      <form action="/admin/settings/<%= group %>" method="post" class="rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-[#faf9f6] dark:bg-[#0d1117] p-6">
+      <form action="/admin/settings/<%= group %>" method="post" class="glass-card p-6">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <h3 class="font-display text-xl font-bold text-[#1a1a2e] dark:text-[#f0f6fc] capitalize mb-5"><%= group == 'social' ? 'Social Profiles' : group %> Settings</h3>
         <div class="grid gap-4 md:grid-cols-2">
@@ -13,7 +13,7 @@
             <div>
               <label for="<%= key %>" class="mb-1.5 block text-sm font-bold text-[#475569] dark:text-[#8b949e] capitalize"><%= key.replace(/([A-Z])/g, ' $1') %></label>
               <input type="text" id="<%= key %>" name="<%= key %>" value="<%= settings[group][key] %>"
-                class="w-full rounded-xl border border-[#e2e8f0] dark:border-[#30363d] bg-white dark:bg-[#161b22] px-4 py-3 text-[#1a1a2e] dark:text-[#f0f6fc] transition-all focus:border-[#7c3aed]/40 focus:outline-none focus:ring-2 focus:ring-[#7c3aed]/10">
+                class="w-full glass-input">
             </div>
           <% }) %>
         </div>
