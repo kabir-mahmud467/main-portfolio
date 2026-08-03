@@ -1,5 +1,6 @@
 import { appConfig } from "../../config/app.config.js";
 import { buildMeta } from "../../core/utils/metaBuilder.js";
+import { renderCache } from "../../core/utils/renderCache.js";
 import {
   createPortfolioProject,
   getAdminProjects,
@@ -102,6 +103,7 @@ export function renderNewProject(req, res) {
 export async function handleCreateProject(req, res, next) {
   try {
     await createPortfolioProject(req.body);
+    renderCache.flush();
     req.flash("success", "Project created.");
     res.redirect("/admin/projects");
   } catch (error) {
@@ -133,6 +135,7 @@ export async function renderEditProject(req, res, next) {
 export async function handleUpdateProject(req, res, next) {
   try {
     await updatePortfolioProject(req.params.id, req.body);
+    renderCache.flush();
     req.flash("success", "Project updated.");
     res.redirect("/admin/projects");
   } catch (error) {
@@ -143,6 +146,7 @@ export async function handleUpdateProject(req, res, next) {
 export async function handleDeleteProject(req, res, next) {
   try {
     await removePortfolioProject(req.params.id);
+    renderCache.flush();
     req.flash("success", "Project deleted.");
     res.redirect("/admin/projects");
   } catch (error) {

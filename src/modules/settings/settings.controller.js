@@ -1,4 +1,5 @@
 import { buildMeta } from "../../core/utils/metaBuilder.js";
+import { renderCache } from "../../core/utils/renderCache.js";
 import { getAllSettings, updateSettings } from "./settings.service.js";
 
 export async function renderAdminSettings(req, res) {
@@ -23,6 +24,7 @@ export async function handleUpdateSettings(req, res) {
   }
 
   await updateSettings(group, values);
+  renderCache.flush();
   req.flash("success", "Settings saved.");
   res.redirect("/admin/settings");
 }

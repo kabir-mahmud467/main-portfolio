@@ -15,7 +15,7 @@
     "start": "node src/server.js",
     "create-admin": "node scripts/create-admin.js",
     "seed": "node scripts/seed-demo.js",
-    "lint": "node --check src/server.js && node --check src/app.js && node --check api/index.js && node --check src/config/app.config.js && node --check src/config/db.config.js && node --check src/config/security.config.js && node --check src/modules/settings/settings.service.js"
+    "lint": "node --check src/server.js && node --check src/app.js && node --check api/index.js && node --check src/config/app.config.js && node --check src/config/db.config.js && node --check src/config/security.config.js && node --check src/modules/settings/settings.service.js && node --check src/core/utils/renderCache.js && node --check src/core/middleware/renderCache.middleware.js && node --check src/modules/blog/blog.controller.js && node --check src/modules/projects/projects.controller.js && node --check src/modules/media/media.controller.js"
   },
   "keywords": [
     "portfolio",

@@ -1,6 +1,7 @@
 import { buildMeta } from "../../core/utils/metaBuilder.js";
 import { appConfig } from "../../config/app.config.js";
 import { buildSitemapXml } from "../../core/utils/sitemap.js";
+import { renderCache } from "../../core/utils/renderCache.js";
 import { Project } from "../projects/project.model.js";
 import { Tool } from "../tools/tool.model.js";
 import { toolDefinitions } from "../tools/tools.registry.js";
@@ -109,6 +110,7 @@ export function renderNewPost(req, res) {
 export async function handleCreatePost(req, res, next) {
   try {
     await createBlogPost(req.body);
+    renderCache.flush();
     req.flash("success", "Post created.");
     res.redirect("/admin/posts");
   } catch (error) {
@@ -140,6 +142,7 @@ export async function renderEditPost(req, res, next) {
 export async function handleUpdatePost(req, res, next) {
   try {
     await updateBlogPost(req.params.id, req.body);
+    renderCache.flush();
     req.flash("success", "Post updated.");
     res.redirect("/admin/posts");
   } catch (error) {
@@ -150,6 +153,7 @@ export async function handleUpdatePost(req, res, next) {
 export async function handleDeletePost(req, res, next) {
   try {
     await removeBlogPost(req.params.id);
+    renderCache.flush();
     req.flash("success", "Post deleted.");
     res.redirect("/admin/posts");
   } catch (error) {
@@ -173,6 +177,7 @@ export async function renderAdminCategories(req, res, next) {
 export async function handleCreateCategory(req, res, next) {
   try {
     await addCategory(req.body);
+    renderCache.flush();
     req.flash("success", "Category created.");
     res.redirect("/admin/categories");
   } catch (error) {
@@ -183,6 +188,7 @@ export async function handleCreateCategory(req, res, next) {
 export async function handleDeleteCategory(req, res, next) {
   try {
     await removeCategory(req.params.id);
+    renderCache.flush();
     req.flash("success", "Category deleted.");
     res.redirect("/admin/categories");
   } catch (error) {

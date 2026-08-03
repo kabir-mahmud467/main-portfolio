@@ -1,4 +1,5 @@
 import { buildMeta } from "../../core/utils/metaBuilder.js";
+import { renderCache } from "../../core/utils/renderCache.js";
 import { getAllMedia, uploadFile, deleteMedia, updateMediaAlt } from "./media.service.js";
 
 export async function renderAdminMedia(req, res) {
@@ -18,12 +19,14 @@ export async function handleUpload(req, res) {
   }
 
   await uploadFile(req.file);
+  renderCache.flush();
   req.flash("success", "File uploaded.");
   res.redirect("/admin/media");
 }
 
 export async function handleDeleteMedia(req, res) {
   const result = await deleteMedia(req.params.id);
+  renderCache.flush();
   if (!result) {
     req.flash("error", "Media not found.");
   } else {
@@ -34,6 +37,7 @@ export async function handleDeleteMedia(req, res) {
 
 export async function handleUpdateAlt(req, res) {
   await updateMediaAlt(req.params.id, req.body.alt);
+  renderCache.flush();
   req.flash("success", "Alt text updated.");
   res.redirect("/admin/media");
 }

@@ -15,6 +15,7 @@ import { attachAuthenticatedUser } from "./core/middleware/auth.middleware.js";
 import { csrfProtection } from "./core/middleware/csrf.middleware.js";
 import { performanceHeaders } from "./core/middleware/performance.middleware.js";
 import { ensureDatabaseConnection } from "./core/middleware/database.middleware.js";
+import { cachedPage } from "./core/middleware/renderCache.middleware.js";
 import { renderRss, renderSitemap } from "./modules/blog/blog.controller.js";
 import { renderRobots } from "./modules/pages/pages.controller.js";
 
@@ -43,16 +44,16 @@ app.use(attachAuthenticatedUser);
 app.use(csrfProtection);
 app.use(viewLocals);
 
-app.use("/", pagesRouter);
-app.get("/robots.txt", renderRobots);
-app.use("/blog", blogRouter);
-app.get("/sitemap.xml", renderSitemap);
-app.get("/rss.xml", renderRss);
-app.use("/projects", projectsRouter);
+app.use("/", cachedPage({ ttl: 300 }), pagesRouter);
+app.get("/robots.txt", cachedPage({ ttl: 3600 }), renderRobots);
+app.use("/blog", cachedPage({ ttl: 300 }), blogRouter);
+app.get("/sitemap.xml", cachedPage({ ttl: 3600 }), renderSitemap);
+app.get("/rss.xml", cachedPage({ ttl: 3600 }), renderRss);
+app.use("/projects", cachedPage({ ttl: 300 }), projectsRouter);
 app.use("/tools", (req, res) => {
   res.redirect(301, `https://tools.kabirmahmud.xyz${req.path}`);
 });
-app.use("/contact", contactRouter);
+app.use("/contact", cachedPage({ ttl: 60 }), contactRouter);
 app.use("/admin", authRouter);
 app.use("/admin", adminRouter);
 
