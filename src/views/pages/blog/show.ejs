@@ -5,7 +5,7 @@
     <p class="mt-5 text-lg leading-8 text-ink/70"><%= post.excerpt %></p>
     <div class="mt-5 flex flex-wrap gap-3 text-sm font-bold text-ink/55">
       <span><%= post.readingTime %> min read</span>
-      <% (post.categories || []).forEach((category) => { %><span><%= category %></span><% }) %>
+      <% (post.categoryLinks || []).forEach((link) => { %><a class="hover:text-flame" href="/blog/category/<%= link.slug %>"><%= link.name %></a><% }) %>
       <% (post.tags || []).forEach((tag) => { %><span>#<%= tag %></span><% }) %>
     </div>
     <% if (post.coverImage) { %>

@@ -9,8 +9,10 @@ import {
   addCategory,
   createBlogPost,
   getAdminPosts,
+  getBlogCategories,
   getBlogIndex,
   getCategories,
+  getCategoryPage,
   getPostForAdmin,
   getPublishedPost,
   getRssFeed,
@@ -31,6 +33,57 @@ export async function renderBlogIndex(req, res, next) {
         description: "Technical writing on software architecture, backend systems, web development, and practical engineering."
       }),
       ...data
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function renderBlogCategories(req, res, next) {
+  try {
+    const categories = await getBlogCategories();
+    res.render("pages/blog/categories", {
+      title: "Blog Categories",
+      meta: buildMeta(req, {
+        title: "Blog Categories",
+        description: "Browse the blog by topic: Linux commands, Termux tools, server administration, shell automation, and software engineering."
+      }),
+      categories,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Blog", href: "/blog" },
+        { label: "Categories" }
+      ]
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function renderBlogCategory(req, res, next) {
+  try {
+    const page = Math.max(1, Number(req.query.page || 1));
+    const data = await getCategoryPage({ slug: req.params.slug, page });
+    if (!data) {
+      const error = new Error("Category not found.");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    res.render("pages/blog/category", {
+      title: `${data.category.name} Archives`,
+      meta: buildMeta(req, {
+        title: `${data.category.name} — Blog Archives`,
+        description: `All blog articles about ${data.category.name.toLowerCase()}: guides, tutorials, and engineering notes with ${data.category.count} posts.`,
+        canonical: `${appConfig.url}/blog/category/${data.category.slug}`,
+        type: "collection"
+      }),
+      ...data,
+      breadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Blog", href: "/blog" },
+        { label: data.category.name }
+      ]
     });
   } catch (error) {
     next(error);
@@ -203,15 +256,17 @@ export async function renderSitemap(req, res, next) {
       ? appConfig.url
       : requestedOrigin);
 
-    const [blogResult, projectResult, toolResult] = await Promise.allSettled([
+    const [blogResult, projectResult, toolResult, categoryResult] = await Promise.allSettled([
       getSitemapUrls(),
       Project.find({ status: "published" }).select("slug updatedAt publishedAt").lean(),
-      Tool.find({ status: "active" }).select("slug updatedAt").lean()
+      Tool.find({ status: "active" }).select("slug updatedAt").lean(),
+      getBlogCategories()
     ]);
 
     const urls = blogResult.status === "fulfilled" ? blogResult.value : [];
     const projects = projectResult.status === "fulfilled" ? projectResult.value : [];
     const dbTools = toolResult.status === "fulfilled" ? toolResult.value : [];
+    const categories = categoryResult.status === "fulfilled" ? categoryResult.value : [];
 
     const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/privacy-policy", "/terms", "/dmca"].map((path) => ({
       loc: `${resolvedBaseUrl}${path}`,
@@ -236,7 +291,14 @@ export async function renderSitemap(req, res, next) {
       }))
     ];
 
-    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, toolUrls, baseUrl: resolvedBaseUrl });
+    const categoryUrls = categories
+      .filter((category) => category?.slug)
+      .map((category) => ({
+        loc: `${resolvedBaseUrl}/blog/category/${category.slug}`,
+        lastmod: new Date().toISOString()
+      }));
+
+    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, toolUrls, categoryUrls, baseUrl: resolvedBaseUrl });
     res.type("application/xml").send(xml);
   } catch (error) {
     next(error);

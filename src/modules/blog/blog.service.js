@@ -5,15 +5,18 @@ import { renderMarkdown } from "../../core/utils/markdown.js";
 import { sanitizeHtml, stripHtml } from "../../core/utils/sanitizeHtml.js";
 import {
   countPublishedPosts,
+  countPublishedPostsByCategory,
   createCategory,
   createPost,
   deleteCategory,
   deletePost,
   findAllCategories,
   findAllPosts,
+  findCategoriesWithCounts,
   findPostBySlug,
   findPostForAdmin,
   findPublishedPosts,
+  findPublishedPostsByCategory,
   findPublishedPostsForFeed,
   findRelatedPosts,
   updatePost
@@ -57,17 +60,56 @@ function normalizePostPayload(body) {
 
 export async function getBlogIndex({ page = 1, search = "" }) {
   const limit = 9;
-  const [posts, total] = await Promise.all([
+  const [posts, total, categories] = await Promise.all([
     findPublishedPosts({ page, limit, search }),
-    countPublishedPosts({ search })
+    countPublishedPosts({ search }),
+    getBlogCategories()
   ]);
 
   return {
-    posts,
+    posts: posts.map(withCategoryLinks),
     total,
     page,
     totalPages: Math.max(1, Math.ceil(total / limit)),
-    search
+    search,
+    categories
+  };
+}
+
+export async function getBlogCategories() {
+  const rows = await findCategoriesWithCounts();
+  return rows.map((row) => ({
+    name: row._id,
+    slug: slugify(row._id),
+    count: row.count
+  }));
+}
+
+export async function getCategoryPage({ slug, page = 1 }) {
+  const categories = await getBlogCategories();
+  const category = categories.find((item) => item.slug === slug);
+  if (!category) return null;
+
+  const limit = 9;
+  const [posts, total] = await Promise.all([
+    findPublishedPostsByCategory({ category: category.name, page, limit }),
+    countPublishedPostsByCategory(category.name)
+  ]);
+
+  return {
+    category,
+    posts: posts.map(withCategoryLinks),
+    total,
+    page,
+    totalPages: Math.max(1, Math.ceil(total / limit)),
+    categories
+  };
+}
+
+function withCategoryLinks(post) {
+  return {
+    ...post,
+    categoryLinks: (post.categories || []).map((name) => ({ name, slug: slugify(name) }))
   };
 }
 
@@ -77,11 +119,11 @@ export async function getPublishedPost(slug) {
   const relatedPosts = await findRelatedPosts(post);
   const isHtml = post.contentFormat === "html";
   return {
-    post: {
+    post: withCategoryLinks({
       ...post,
       html: isHtml ? sanitizeHtml(post.content) : renderMarkdown(post.content)
-    },
-    relatedPosts
+    }),
+    relatedPosts: relatedPosts.map(withCategoryLinks)
   };
 }
 

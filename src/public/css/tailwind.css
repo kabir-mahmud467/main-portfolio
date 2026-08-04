@@ -161,6 +161,10 @@
     @apply border-[#7c3aed]/40 shadow-[0_16px_48px_rgba(124,58,237,0.18)];
   }
 
+  .glass-card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-[#7c3aed]/40 hover:shadow-[0_16px_48px_rgba(124,58,237,0.18)];
+  }
+
   .dark .glass-card {
     @apply border-white/10 bg-white/[0.06] shadow-[0_8px_32px_rgba(0,0,0,0.35)];
   }

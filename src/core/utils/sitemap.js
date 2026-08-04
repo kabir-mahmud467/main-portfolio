@@ -19,10 +19,10 @@ function isLocalhostUrl(value) {
   return /^(https?:\/\/)?(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i.test(value);
 }
 
-export function buildSitemapXml({ staticUrls = [], blogUrls = [], projectUrls = [], toolUrls = [], baseUrl = "" } = {}) {
+export function buildSitemapXml({ staticUrls = [], blogUrls = [], projectUrls = [], toolUrls = [], categoryUrls = [], baseUrl = "" } = {}) {
   const normalizedBaseUrl = normalizeUrl(baseUrl || appConfig.url);
   const seen = new Set();
-  const urls = [...staticUrls, ...blogUrls, ...projectUrls, ...toolUrls]
+  const urls = [...staticUrls, ...blogUrls, ...projectUrls, ...toolUrls, ...categoryUrls]
     .filter(Boolean)
     .map((entry) => ({
       loc: normalizeUrl(entry.loc),
