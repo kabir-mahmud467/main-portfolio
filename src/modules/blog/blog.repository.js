@@ -58,27 +58,6 @@ export function findPublishedPostsForFeed(limit = 20) {
   return Post.find({ status: "published" }).sort({ publishedAt: -1 }).limit(limit).lean();
 }
 
-export function findPublishedPostsByCategory({ category, page = 1, limit = 9 }) {
-  return Post.find({ status: "published", categories: category })
-    .sort({ featured: -1, publishedAt: -1 })
-    .skip((page - 1) * limit)
-    .limit(limit)
-    .lean();
-}
-
-export function countPublishedPostsByCategory(category) {
-  return Post.countDocuments({ status: "published", categories: category });
-}
-
-export function findCategoriesWithCounts() {
-  return Post.aggregate([
-    { $match: { status: "published" } },
-    { $unwind: "$categories" },
-    { $group: { _id: "$categories", count: { $sum: 1 } } },
-    { $sort: { count: -1, _id: 1 } }
-  ]);
-}
-
 export function findAllCategories() {
   return Category.find({ type: "blog" }).sort({ name: 1 }).lean();
 }

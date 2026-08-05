@@ -22,7 +22,7 @@ export async function connectDatabase() {
 
   connectionPromise = mongoose.connect(dbConfig.uri, {
     autoIndex: process.env.NODE_ENV !== "production",
-    serverSelectionTimeoutMS: 30000,
+    serverSelectionTimeoutMS: 5000,
     maxPoolSize: 10
   });
 
