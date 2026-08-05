@@ -6,7 +6,7 @@ export function performanceHeaders(req, res, next) {
   } else if (req.path === "/sitemap.xml" || req.path === "/robots.txt" || req.path === "/rss.xml") {
     res.setHeader("Cache-Control", "public, max-age=900, stale-while-revalidate=86400");
   } else if (req.method === "GET" && !req.path.startsWith("/admin")) {
-    res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "public, max-age=300, s-maxage=900, stale-while-revalidate=86400");
   } else {
     res.setHeader("Cache-Control", "no-store");
   }

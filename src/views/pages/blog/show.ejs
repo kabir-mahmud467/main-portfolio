@@ -2,14 +2,14 @@
   <div class="container-page max-w-4xl">
     <%- include("../../partials/breadcrumbs") %>
     <h1 class="mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl"><%= post.title %></h1>
-    <p class="mt-5 text-lg leading-8 text-ink/70"><%= post.excerpt %></p>
-    <div class="mt-5 flex flex-wrap gap-3 text-sm font-bold text-ink/55">
+    <p class="mt-5 text-lg leading-8 text-ink/70 dark:text-white/60"><%= post.excerpt %></p>
+    <div class="mt-5 flex flex-wrap gap-3 text-sm font-bold text-ink/55 dark:text-white/45">
       <span><%= post.readingTime %> min read</span>
       <% (post.categories || []).forEach((category) => { %><span><%= category %></span><% }) %>
       <% (post.tags || []).forEach((tag) => { %><span>#<%= tag %></span><% }) %>
     </div>
     <% if (post.coverImage) { %>
-      <img class="mt-8 aspect-[16/9] w-full rounded-2xl border border-white/60 object-cover shadow-xl" src="<%= post.coverImage %>" alt="" fetchpriority="high" decoding="async">
+      <img class="mt-8 aspect-[16/9] w-full rounded-2xl border border-white/60 object-cover dark:border-white/10 shadow-xl" src="<%= post.coverImage %>" alt="" fetchpriority="high" decoding="async">
     <% } %>
     <div class="prose prose-neutral mt-10 max-w-none prose-headings:font-display">
       <%- post.html %>
@@ -25,7 +25,7 @@
         <% relatedPosts.forEach((item) => { %>
           <article class="glass-card p-5">
             <h3 class="font-bold"><a href="/blog/<%= item.slug %>"><%= item.title %></a></h3>
-            <p class="mt-2 text-sm leading-6 text-ink/70"><%= item.excerpt %></p>
+            <p class="mt-2 text-sm leading-6 text-ink/70 dark:text-white/60"><%= item.excerpt %></p>
           </article>
         <% }) %>
       </div>

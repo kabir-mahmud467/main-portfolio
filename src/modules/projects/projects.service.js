@@ -1,5 +1,6 @@
 import { calculateReadingTime } from "../../core/utils/readingTime.js";
 import { renderMarkdown } from "../../core/utils/markdown.js";
+import { localizeImage, rewriteHtmlImageSources } from "../../core/utils/localizeImage.js";
 import { slugify } from "../../core/utils/slugify.js";
 import {
   createProject,
@@ -49,7 +50,11 @@ function normalizeProjectPayload(body) {
 }
 
 export async function getProjectsIndex({ search = "", category = "" } = {}) {
-  return findPublishedProjects({ search, category });
+  const projects = await findPublishedProjects({ search, category });
+  return (projects || []).map((project) => ({
+    ...project,
+    coverImage: project.coverImage ? localizeImage(project.coverImage, 600) : null
+  }));
 }
 
 export async function getPublishedProject(slug) {
@@ -57,7 +62,9 @@ export async function getPublishedProject(slug) {
   if (!project) return null;
   return {
     ...project,
-    html: renderMarkdown(project.description),
+    coverImage: project.coverImage ? localizeImage(project.coverImage) : null,
+    gallery: (project.gallery || []).map((url) => localizeImage(url)),
+    html: rewriteHtmlImageSources(renderMarkdown(project.description)),
     readingTime: calculateReadingTime(project.description)
   };
 }

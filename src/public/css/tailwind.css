@@ -14,6 +14,10 @@
   ::selection {
     @apply bg-[#7c3aed]/20 text-[#1a1a2e];
   }
+
+  .dark ::selection {
+    @apply bg-[#a78bfa]/25 text-white;
+  }
 }
 
 @layer components {
@@ -25,12 +29,20 @@
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7c3aed] focus-visible:ring-offset-2 focus-visible:ring-offset-[#faf9f6];
   }
 
+  .dark .focus-ring {
+    @apply focus-visible:ring-[#a78bfa] focus-visible:ring-offset-[#0b0f19];
+  }
+
   .btn-primary {
     @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#6366f1] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:from-[#6d28d9] hover:to-[#4f46e5] hover:shadow-lg hover:shadow-[#7c3aed]/25 active:scale-[0.97];
   }
 
   .btn-secondary {
     @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-[#e2e8f0] bg-white px-6 py-3 text-sm font-semibold text-[#1a1a2e] transition-all duration-300 hover:border-[#7c3aed]/30 hover:bg-[#7c3aed]/5 hover:shadow-lg hover:shadow-[#7c3aed]/10 active:scale-[0.97];
+  }
+
+  .dark .btn-secondary {
+    @apply border-white/15 bg-white/[0.06] text-white hover:border-[#a78bfa]/40 hover:bg-[#a78bfa]/10 hover:shadow-[#a78bfa]/10;
   }
 
   .nav-link {
@@ -111,6 +123,48 @@
 
   .prose hr {
     @apply my-10 border-[#e2e8f0];
+  }
+
+  .dark .prose {
+    @apply text-[#a0a8bd];
+  }
+
+  .dark .prose h1,
+  .dark .prose h2,
+  .dark .prose h3 {
+    @apply text-white;
+  }
+
+  .dark .prose a {
+    @apply text-[#a78bfa] hover:text-[#c4b5fd];
+  }
+
+  .dark .prose blockquote {
+    @apply border-[#a78bfa] bg-[#a78bfa]/10 text-[#c9d1e8];
+  }
+
+  .dark .prose :where(code):not(pre code) {
+    @apply bg-[#a78bfa]/15 text-[#c4b5fd];
+  }
+
+  .dark .prose img {
+    @apply border-white/10;
+  }
+
+  .dark .prose table {
+    @apply bg-white/[0.04];
+  }
+
+  .dark .prose th {
+    @apply border-white/10 bg-[#a78bfa]/10 text-white;
+  }
+
+  .dark .prose td {
+    @apply border-white/10 text-[#c9d1e8];
+  }
+
+  .dark .prose hr {
+    @apply border-white/10;
   }
 
   .animate-fade-in {

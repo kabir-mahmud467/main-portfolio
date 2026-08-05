@@ -70,7 +70,7 @@
             </select>
           </div>
           <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-white/70 bg-white/50 px-4 py-3 backdrop-blur-md transition-all hover:bg-white/80 dark:border-white/10 dark:bg-white/[0.06] dark:hover:bg-white/10">
-            <input name="featured" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] focus:ring-[#7c3aed]/30" <%= post?.featured ? 'checked' : '' %>>
+            <input name="featured" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] dark:border-white/20 dark:border-white/20 focus:ring-[#7c3aed]/30" <%= post?.featured ? 'checked' : '' %>>
             <span class="text-sm font-bold text-[#475569] dark:text-[#8b949e]">Featured post</span>
           </label>
           <div>
@@ -101,7 +101,7 @@
           <input class="glass-input font-mono text-sm" name="ogImage" value="<%= post?.seo?.ogImage || '' %>" placeholder="Open Graph image URL">
           <input class="glass-input font-mono text-sm" name="canonicalUrl" value="<%= post?.seo?.canonicalUrl || '' %>" placeholder="Canonical URL">
           <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-white/70 bg-white/50 px-4 py-3 backdrop-blur-md transition-all hover:bg-white/80 dark:border-white/10 dark:bg-white/[0.06] dark:hover:bg-white/10">
-            <input name="noIndex" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] focus:ring-[#7c3aed]/30" <%= post?.seo?.noIndex ? 'checked' : '' %>>
+            <input name="noIndex" type="checkbox" class="h-5 w-5 rounded-lg border-[#e2e8f0] text-[#7c3aed] dark:border-white/20 dark:border-white/20 focus:ring-[#7c3aed]/30" <%= post?.seo?.noIndex ? 'checked' : '' %>>
             <span class="text-sm font-bold text-[#475569] dark:text-[#8b949e]">No index</span>
           </label>
         </div>

@@ -4,9 +4,9 @@
       <div>
         <%- include("../../partials/breadcrumbs") %>
         <h1 class="mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl"><%= project.title %></h1>
-        <p class="mt-5 text-lg leading-8 text-ink/70"><%= project.summary %></p>
+        <p class="mt-5 text-lg leading-8 text-ink/70 dark:text-white/60"><%= project.summary %></p>
         <% if (project.coverImage) { %>
-          <img class="mt-8 aspect-[16/9] w-full rounded-2xl border border-white/60 object-cover shadow-xl" src="<%= project.coverImage %>" alt="" fetchpriority="high" decoding="async">
+          <img class="mt-8 aspect-[16/9] w-full rounded-2xl border border-white/60 object-cover dark:border-white/10 shadow-xl" src="<%= project.coverImage %>" alt="" fetchpriority="high" decoding="async">
         <% } %>
         <div class="prose mt-10 max-w-none">
           <%- project.html %>
@@ -35,7 +35,7 @@
         <h2 class="font-display text-3xl font-extrabold">Gallery</h2>
         <div class="mt-6 grid gap-4 md:grid-cols-3">
           <% project.gallery.forEach((image) => { %>
-            <img class="aspect-[4/3] rounded-xl border border-white/60 object-cover shadow-lg" src="<%= image %>" alt="" loading="lazy" decoding="async">
+            <img class="aspect-[4/3] rounded-xl border border-white/60 object-cover dark:border-white/10 shadow-lg" src="<%= image %>" alt="" loading="lazy" decoding="async">
           <% }) %>
         </div>
       </section>

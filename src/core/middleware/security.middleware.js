@@ -40,7 +40,7 @@ export function registerCoreMiddleware(app, express) {
           "script-src": ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
           "style-src": ["'self'", "https://fonts.googleapis.com"],
           "font-src": ["'self'", "https://fonts.gstatic.com"],
-          "img-src": ["'self'", "data:", "blob:", "https://api.qrserver.com"]
+          "img-src": ["'self'", "data:", "blob:", "https://api.qrserver.com", "https://picsum.photos", "https://fastly.picsum.photos"]
         }
       }
     })

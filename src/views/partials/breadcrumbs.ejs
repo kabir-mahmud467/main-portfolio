@@ -1,11 +1,11 @@
 <% if (breadcrumbs && breadcrumbs.length) { %>
-  <nav class="flex flex-wrap gap-2 text-sm font-semibold text-ink/60" aria-label="Breadcrumb">
+  <nav class="flex flex-wrap gap-2 text-sm font-semibold text-ink/60 dark:text-white/50" aria-label="Breadcrumb">
     <% breadcrumbs.forEach((item, index) => { %>
       <% if (index) { %><span>/</span><% } %>
       <% if (item.href) { %>
-        <a class="hover:text-ink" href="<%= item.href %>"><%= item.label %></a>
+        <a class="hover:text-ink dark:hover:text-white" href="<%= item.href %>"><%= item.label %></a>
       <% } else { %>
-        <span class="text-ink"><%= item.label %></span>
+        <span class="text-ink dark:text-white"><%= item.label %></span>
       <% } %>
     <% }) %>
   </nav>
