@@ -7,13 +7,14 @@ import { slugify } from "../src/core/utils/slugify.js";
 import { calculateReadingTime } from "../src/core/utils/readingTime.js";
 import { TOPIC_SETS_A } from "./seed-content-posts-1.js";
 import { TOPIC_SETS_B } from "./seed-content-posts-2.js";
+import { TOPIC_SETS_C } from "./seed-content-posts-3.js";
 import { PROJECT_TYPES } from "./seed-content-projects.js";
 import { EXTRA_BLOCKS } from "./seed-content-extra.js";
 
 dotenv.config();
 
 const WIPE = process.argv.includes("--wipe");
-const ALL_TOPICS = [...TOPIC_SETS_A, ...TOPIC_SETS_B];
+const ALL_TOPICS = [...TOPIC_SETS_A, ...TOPIC_SETS_B, ...TOPIC_SETS_C];
 const PICSUM = (seed, w = 1200, h = 675) => `https://picsum.photos/seed/${seed}/${w}/${h}`;
 
 let seedState = 42;
@@ -86,6 +87,10 @@ const TOPIC_TO_PROJECT = {
   Performance: "EventPulse",
   Career: "DevBench",
   Tools: "NoteNest",
+  Linux: "DevBench",
+  Termux: "NoteNest",
+  Servers: "TaskFlow Pro",
+  "Shell & Automation": "PulseBoard",
 };
 
 const TOPIC_TO_BLOG_SLUG = {
@@ -99,13 +104,17 @@ const TOPIC_TO_BLOG_SLUG = {
   Performance: "performance-optimization-for-content-heavy-websites",
   Career: "growing-from-junior-to-senior-full-stack-developer",
   Tools: "the-modern-developer-toolkit-in-2026",
+  Linux: "essential-linux-commands-every-developer-should-master-in-2026",
+  Termux: "termux-setup-guide-turning-your-android-phone-into-a-linux-box",
+  Servers: "setting-up-your-first-linux-vps-a-complete-walkthrough",
+  "Shell & Automation": "bash-scripting-for-beginners-write-your-first-script-today",
 };
 
 function pickProjectFor(category) {
   return TOPIC_TO_PROJECT[category] || "InvoiceFlow";
 }
 
-function buildPost(topic, postIdx, globalIdx) {
+export function buildPost(topic, postIdx, globalIdx) {
   const title = topic.titles[postIdx % topic.titles.length];
   const slug = slugify(title);
   const rot = postIdx % 3;
@@ -389,8 +398,12 @@ async function main() {
   await mongoose.disconnect();
 }
 
-main().catch(async (err) => {
-  console.error("Seeding failed:", err);
-  await mongoose.disconnect();
-  process.exit(1);
-});
+const isMain = process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href;
+
+if (isMain) {
+  main().catch(async (err) => {
+    console.error("Seeding failed:", err);
+    await mongoose.disconnect();
+    process.exit(1);
+  });
+}
