@@ -27,8 +27,18 @@ function generateFilename(originalName) {
   return `${name}-${timestamp}${ext}`;
 }
 
+const ALLOWED_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".pdf"]);
+
 export async function uploadFile(file) {
   await ensureUploadsDir();
+
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (!ALLOWED_EXTENSIONS.has(ext)) {
+    const error = new Error(`Invalid file extension ".${ext || "none"}". Allowed: JPG, PNG, WebP, GIF, SVG, PDF.`);
+    error.statusCode = 400;
+    throw error;
+  }
+
   const filename = generateFilename(file.originalname);
   const filepath = path.join(UPLOADS_DIR, filename);
 

@@ -12,16 +12,21 @@ export async function renderAdminMedia(req, res) {
   });
 }
 
-export async function handleUpload(req, res) {
+export async function handleUpload(req, res, next) {
   if (!req.file) {
     req.flash("error", "No file selected.");
     return res.redirect("/admin/media");
   }
 
-  await uploadFile(req.file);
-  renderCache.flush();
-  req.flash("success", "File uploaded.");
-  res.redirect("/admin/media");
+  try {
+    await uploadFile(req.file);
+    renderCache.flush();
+    req.flash("success", "File uploaded.");
+    res.redirect("/admin/media");
+  } catch (error) {
+    req.flash("error", error.message || "Upload failed.");
+    res.redirect("/admin/media");
+  }
 }
 
 export async function handleDeleteMedia(req, res) {

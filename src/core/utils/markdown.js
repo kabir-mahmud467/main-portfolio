@@ -30,7 +30,7 @@ export function renderMarkdown(markdown) {
     const imageOnly = joined.match(/^!\[([^\]]*)\]\(((?:https?:\/\/[^)]+)|\/[^)\s]+)\)$/);
     if (imageOnly) {
       html.push(
-        `<img src="${imageOnly[2]}" alt="${escapeHtml(imageOnly[1])}" loading="lazy" ` +
+        `<img src="${escapeHtml(imageOnly[2])}" alt="${escapeHtml(imageOnly[1])}" loading="lazy" ` +
         `class="mt-6 w-full rounded-xl border border-line/70 object-cover shadow-soft" />`
       );
       paragraph = [];

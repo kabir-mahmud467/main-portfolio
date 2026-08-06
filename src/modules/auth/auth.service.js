@@ -16,6 +16,15 @@ function isLocked(user) {
   return user.lockedUntil && user.lockedUntil > new Date();
 }
 
+let dummyHash = null;
+
+async function getDummyHash() {
+  if (!dummyHash) {
+    dummyHash = await hashPassword("timing-equalizer-dummy-password");
+  }
+  return dummyHash;
+}
+
 function getRedirectTarget(nextUrl) {
   if (!nextUrl || !nextUrl.startsWith("/") || nextUrl.startsWith("//")) {
     return "/admin";
@@ -28,6 +37,7 @@ export async function loginAdmin(req, { email, password, remember, next }) {
   const user = await findUserByEmail(email);
 
   if (!user || !user.isActive || user.role !== "admin") {
+    await verifyPassword(password, await getDummyHash());
     throw new Error("Invalid email or password.");
   }
 

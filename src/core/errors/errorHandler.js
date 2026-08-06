@@ -33,7 +33,7 @@ export function errorHandler(error, req, res, next) {
     res.status(statusCode).json({
       success: false,
       error: {
-        message: error.message,
+        message: statusCode === 404 || !appConfig.isProduction ? error.message : "Internal Server Error",
         statusCode,
         ...(error.details && Object.keys(error.details).length ? { details: error.details } : {})
       }
@@ -47,7 +47,7 @@ export function errorHandler(error, req, res, next) {
     title: statusCode === 404 ? "Page not found" : "Server error",
     description: "Something went wrong.",
     statusCode,
-    message: error.message,
+    message: statusCode === 404 || !appConfig.isProduction ? error.message : "Something went wrong.",
     stack: appConfig.isProduction ? null : error.stack
   });
 }

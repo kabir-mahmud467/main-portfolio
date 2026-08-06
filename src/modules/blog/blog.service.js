@@ -138,15 +138,16 @@ export async function getSitemapUrls() {
 
 export async function getRssFeed() {
   const posts = await findPublishedPostsForFeed();
+  const cdata = (value) => String(value || "").replace(/\]\]>/g, "]]]]><![CDATA[>");
   const items = posts
     .map(
       (post) => `
       <item>
-        <title><![CDATA[${post.title}]]></title>
+        <title><![CDATA[${cdata(post.title)}]]></title>
         <link>${appConfig.url}/blog/${post.slug}</link>
         <guid>${appConfig.url}/blog/${post.slug}</guid>
         <pubDate>${new Date(post.publishedAt || post.createdAt).toUTCString()}</pubDate>
-        <description><![CDATA[${post.excerpt}]]></description>
+        <description><![CDATA[${cdata(post.excerpt)}]]></description>
       </item>`
     )
     .join("");

@@ -8,5 +8,20 @@ export function validateRequest(req, res, next) {
   }
 
   req.flash("error", errors.array().map((error) => error.msg));
-  return res.redirect(req.get("Referrer") || "/");
+
+  let fallback = "/";
+  const referrer = req.get("Referrer");
+
+  if (referrer) {
+    try {
+      const ref = new URL(referrer);
+      if (ref.host === req.get("host")) {
+        fallback = `${ref.pathname}${ref.search}`;
+      }
+    } catch {
+      // ignore malformed referrer
+    }
+  }
+
+  return res.redirect(fallback);
 }

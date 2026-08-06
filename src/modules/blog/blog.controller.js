@@ -22,7 +22,8 @@ import {
 
 export async function renderBlogIndex(req, res, next) {
   try {
-    const page = Math.max(1, Number(req.query.page || 1));
+    const rawPage = Number(req.query.page || 1);
+    const page = Number.isFinite(rawPage) && rawPage > 0 ? Math.floor(rawPage) : 1;
     const data = await getBlogIndex({
       page,
       search: req.query.search || "",
