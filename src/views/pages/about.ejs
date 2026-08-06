@@ -1,43 +1,167 @@
 <!-- Hero -->
-<section class="relative overflow-hidden py-16 sm:py-24">
+<section class="relative overflow-hidden py-20 sm:py-28">
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-    <div class="animate-float absolute -top-32 right-0 h-96 w-96 rounded-full bg-[#7c3aed]/15 blur-3xl"></div>
-    <div class="animate-float-delayed absolute -bottom-32 left-0 h-96 w-96 rounded-full bg-[#6366f1]/15 blur-3xl"></div>
+    <div class="animate-float absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#7c3aed]/15 blur-3xl"></div>
+    <div class="animate-float-delayed absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-[#6366f1]/15 blur-3xl"></div>
+    <div class="animate-float absolute top-1/4 left-1/4 h-5 w-5 rounded-full bg-[#ec4899]/30"></div>
+    <div class="animate-float-delayed absolute bottom-1/4 right-1/4 h-4 w-4 rounded-full bg-[#22d3ee]/30"></div>
   </div>
   <div class="container-page relative z-10">
-    <div class="glass-panel mx-auto max-w-4xl p-8 text-center sm:p-14">
-      <div class="glass-chip mx-auto text-xs font-bold uppercase tracking-widest text-[#7c3aed]">About</div>
-      <h1 class="mt-6 font-display text-4xl font-extrabold leading-tight text-[#1a1a2e] dark:text-white sm:text-5xl lg:text-6xl">
-        A focused engineering platform for <span class="animate-gradient bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#ec4899] bg-clip-text text-transparent">useful work</span> and durable ideas.
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#64748b] dark:text-[#a0a8bd]">
-        This site is designed to grow from a personal workspace into a full publishing and utility ecosystem: practical full-stack writing, interactive 3D interfaces, structured web apps, and SEO-optimized digital tools under one durable brand.
-      </p>
-      <div class="mt-10 grid gap-4 sm:grid-cols-3">
-        <div class="glass-card p-6">
-          <p class="font-display text-3xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">5+</p>
-          <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Years of platform work</p>
+    <div class="glass-panel mx-auto max-w-5xl overflow-hidden p-8 sm:p-12 lg:p-16">
+      <div class="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="flex flex-col items-center">
+          <div class="group relative">
+            <div class="h-44 w-44 rounded-full bg-gradient-to-br from-[#7c3aed] via-[#6366f1] to-[#ec4899] p-1.5 shadow-[0_12px_40px_rgba(124,58,237,0.35)] ring-4 ring-[#7c3aed]/15 transition-transform duration-300 group-hover:scale-105 sm:h-52 sm:w-52">
+              <div class="h-full w-full overflow-hidden rounded-full bg-white dark:bg-[#1e293b]">
+                <img src="/images/image.jpg" alt="Kabir Mahmud" class="h-full w-full object-cover" loading="eager"
+                  onerror="this.parentElement.innerHTML='<span class=\'flex h-full w-full items-center justify-center text-5xl font-bold text-[#7c3aed]\'>KM</span>'">
+              </div>
+            </div>
+            <span class="absolute -bottom-1 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white shadow-lg backdrop-blur-md">
+              <span class="h-2 w-2 animate-pulse rounded-full bg-[#22c55e]"></span>
+              Open to work
+            </span>
+          </div>
         </div>
-        <div class="glass-card p-6">
-          <p class="font-display text-3xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">10+</p>
+        <div class="text-center lg:text-left">
+          <div class="glass-chip mx-auto w-fit text-xs font-bold uppercase tracking-widest text-[#7c3aed] lg:mx-0">About</div>
+          <h1 class="mt-5 font-display text-4xl font-extrabold leading-tight text-[#1a1a2e] dark:text-white sm:text-5xl lg:text-6xl">
+            Kabir Mahmud &mdash; software engineer building <span class="animate-gradient bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#ec4899] bg-clip-text text-transparent">durable platforms</span>.
+          </h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#64748b] dark:text-[#a0a8bd] lg:mx-0">
+            Full-stack engineer focused on production-ready web platforms: clean React architectures, practical Express backends, structural digital publishing, SEO strategy, and interactive interfaces enhanced with creative code libraries.
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+            <a href="/contact" class="btn-primary">
+              <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+              Let's Talk
+            </a>
+            <a href="/blog" class="btn-secondary">Read the Blog</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="glass-card p-6 text-center">
+          <p class="font-display text-4xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">5+</p>
+          <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Years building platforms</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="font-display text-4xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">150+</p>
+          <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Published posts &amp; docs</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="font-display text-4xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">30+</p>
+          <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Projects &amp; systems shipped</p>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <p class="font-display text-4xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">10+</p>
           <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Technologies in the stack</p>
-        </div>
-        <div class="glass-card p-6">
-          <p class="font-display text-3xl font-extrabold text-[#7c3aed] dark:text-[#a78bfa]">∞</p>
-          <p class="mt-1 text-sm font-semibold text-[#64748b] dark:text-[#a0a8bd]">Systems in active iteration</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- What I Do -->
+<section class="py-16 sm:py-20">
+  <div class="container-page">
+    <div class="text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-[#7c3aed] dark:text-[#a78bfa]">What I do</p>
+      <h2 class="mt-3 font-display text-4xl font-extrabold text-[#1a1a2e] dark:text-white sm:text-5xl">Everything a platform needs, in one pair of hands.</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#64748b] dark:text-[#a0a8bd]">
+        From architecture to deployment, content to tooling &mdash; built with production discipline.
+      </p>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#6366f1] shadow-lg shadow-[#7c3aed]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Architecture &amp; backend systems</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">System design, Express backends, admin dashboards, data modeling, and production hardening on Node.js and MongoDB.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Node.js</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Express</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">MongoDB</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">REST APIs</span>
+        </div>
+      </article>
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6366f1] to-[#22d3ee] shadow-lg shadow-[#6366f1]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Interactive frontends &amp; 3D</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">Fast Vite + React interfaces with creative 3D texturing, GSAP motion, and clean component architecture.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">React</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Vite</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Tailwind</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">GSAP</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Three.js</span>
+        </div>
+      </article>
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ec4899] to-[#f97316] shadow-lg shadow-[#ec4899]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Content &amp; publishing systems</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">Technical writing, SEO-structured publishing, RSS/sitemap pipelines, and content systems built to be discovered.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">SEO</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Markdown</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">RSS</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Sitemaps</span>
+        </div>
+      </article>
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#22c55e] to-[#a3e635] shadow-lg shadow-[#22c55e]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Developer tools &amp; utilities</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">Browser-first utilities, encoders, generators, and interactive tools deployed as fast standalone apps.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Web Apps</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Local Storage</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Vercel</span>
+        </div>
+      </article>
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8b5cf6] to-[#6366f1] shadow-lg shadow-[#8b5cf6]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Admin platforms &amp; dashboards</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">Structured admin panels for posts, projects, media, categories, and analytics with clean role separation.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Dashboards</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Media</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Analytics</span>
+        </div>
+      </article>
+      <article class="glass-card p-8">
+        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f97316] to-[#ef4444] shadow-lg shadow-[#f97316]/25">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-[#1a1a2e] dark:text-white">Security &amp; production posture</h3>
+        <p class="mt-3 text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">Hardened server configurations, CSP, rate limiting, secure sessions, and Linux/Kali/Debian systems background.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Linux</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Kali</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Debian</span>
+          <span class="glass-chip !px-2.5 !py-1 text-xs">Hardening</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- Year-by-Year Platform Progress Timeline -->
-<section class="py-16">
+<section class="py-16 sm:py-20">
   <div class="container-page">
     <div class="glass-panel p-8 sm:p-12">
       <div class="max-w-3xl">
         <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Evolution</p>
-        <h2 class="mt-3 font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-white sm:text-4xl">Year-by-Year Progress</h2>
+        <h2 class="mt-3 font-display text-4xl font-extrabold text-[#1a1a2e] dark:text-white sm:text-5xl">Year-by-Year Progress</h2>
         <p class="mt-4 text-base leading-7 text-[#64748b] dark:text-[#a0a8bd]">
           Tracking the growth of technologies, active projects, and system milestones.
         </p>
@@ -48,7 +172,7 @@
         <div class="glass-card relative p-6 sm:p-8">
           <span class="absolute -left-[41px] top-7 h-4 w-4 rounded-full bg-gradient-to-br from-[#ec4899] to-[#f97316] ring-4 ring-[#ec4899]/20"></span>
           <span class="text-xs font-bold uppercase tracking-wider text-[#ec4899]">Late 2025</span>
-          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">Foundation & Channel Growth</h3>
+          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">Foundation &amp; Channel Growth</h3>
           <p class="mt-2 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">
             Established core system backgrounds on Linux environments (Kali/Debian). Launched targeted digital optimization strategies across media networks, deploying long-form ambient audio landscapes and indexing initial digital properties.
           </p>
@@ -64,7 +188,7 @@
         <div class="glass-card relative p-6 sm:p-8">
           <span class="absolute -left-[41px] top-7 h-4 w-4 rounded-full bg-gradient-to-br from-[#3b82f6] to-[#22d3ee] ring-4 ring-[#3b82f6]/20"></span>
           <span class="text-xs font-bold uppercase tracking-wider text-[#3b82f6]">Early 2026</span>
-          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">Interactive Systems & Financial Media</h3>
+          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">Interactive Systems &amp; Financial Media</h3>
           <p class="mt-2 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">
             Built a standalone Survey Web App engine using advanced local storage data persistence and programmatic branching decision trees. Established the <em>Wealthwise Starter</em> platform to provide streamlined, search-optimized technical budgeting layouts.
           </p>
@@ -79,7 +203,7 @@
         <div class="glass-card relative p-6 sm:p-8">
           <span class="absolute -left-[41px] top-7 h-4 w-4 rounded-full bg-gradient-to-br from-[#22c55e] to-[#a3e635] ring-4 ring-[#22c55e]/20"></span>
           <span class="text-xs font-bold uppercase tracking-wider text-[#22c55e]">Mid 2026 (Active)</span>
-          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">React, Vercel Stack & Local Commerce</h3>
+          <h3 class="mt-1 text-lg font-extrabold text-[#1a1a2e] dark:text-white sm:text-xl">React, Vercel Stack &amp; Local Commerce</h3>
           <p class="mt-2 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#a0a8bd]">
             Migrated primary frontend infrastructure to highly performant Vite + React setups deployed on Vercel with integrated 3D creative texturizing libraries (GSAP/Three.js). Concurrently managed targeted promotional pipelines for specialized consumer products under local brands.
           </p>
@@ -97,13 +221,13 @@
 </section>
 
 <!-- Engineering Principles -->
-<section class="py-16">
+<section class="py-16 sm:py-20">
   <div class="container-page">
     <div class="glass-panel p-8 sm:p-12">
       <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p class="text-sm font-bold uppercase tracking-wider text-[#7c3aed] dark:text-[#a78bfa]">Principles</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold text-[#1a1a2e] dark:text-white sm:text-4xl">Engineering principles</h2>
+          <h2 class="mt-3 font-display text-4xl font-extrabold text-[#1a1a2e] dark:text-white sm:text-5xl">Engineering principles</h2>
           <p class="mt-4 text-base leading-7 text-[#64748b] dark:text-[#a0a8bd]">
             The platform favors clarity, performance, modularity, and long-term maintainability over unnecessary complexity.
           </p>
@@ -144,9 +268,9 @@
 </section>
 
 <!-- CTA -->
-<section class="py-16">
+<section class="py-16 sm:py-20">
   <div class="container-page">
-    <div class="glass-panel relative overflow-hidden bg-gradient-to-br from-[#1e293b]/90 to-[#0f172a]/90 p-8 sm:p-12">
+    <div class="glass-panel relative overflow-hidden bg-gradient-to-br from-[#1e293b]/90 to-[#0f172a]/90 p-8 sm:p-14">
       <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-3xl" aria-hidden="true">
         <div class="animate-float absolute -top-20 -right-20 h-64 w-64 rounded-full bg-[#7c3aed]/30 blur-3xl"></div>
         <div class="animate-float-delayed absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#6366f1]/30 blur-3xl"></div>
