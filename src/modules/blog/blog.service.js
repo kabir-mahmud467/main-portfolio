@@ -2,7 +2,6 @@ import { appConfig } from "../../config/app.config.js";
 import { calculateReadingTime } from "../../core/utils/readingTime.js";
 import { slugify } from "../../core/utils/slugify.js";
 import { renderMarkdown } from "../../core/utils/markdown.js";
-import { localizeImage, rewriteHtmlImageSources } from "../../core/utils/localizeImage.js";
 import { sanitizeHtml, stripHtml } from "../../core/utils/sanitizeHtml.js";
 import {
   countPublishedPosts,
@@ -17,6 +16,7 @@ import {
   findPublishedPosts,
   findPublishedPostsForFeed,
   findRelatedPosts,
+  getPublishedCategoryStats,
   updatePost
 } from "./blog.repository.js";
 
@@ -56,22 +56,22 @@ function normalizePostPayload(body) {
   };
 }
 
-export async function getBlogIndex({ page = 1, search = "" }) {
+export async function getBlogIndex({ page = 1, search = "", category = "" } = {}) {
   const limit = 9;
-  const [posts, total] = await Promise.all([
-    findPublishedPosts({ page, limit, search }),
-    countPublishedPosts({ search })
+  const [posts, total, categories] = await Promise.all([
+    findPublishedPosts({ page, limit, search, category }),
+    countPublishedPosts({ search, category }),
+    getPublishedCategoryStats()
   ]);
 
   return {
-    posts: (posts || []).map((post) => ({
-      ...post,
-      coverImage: post.coverImage ? localizeImage(post.coverImage, 600) : null
-    })),
+    posts: posts || [],
     total,
     page,
     totalPages: Math.max(1, Math.ceil(total / limit)),
-    search
+    search,
+    category,
+    categories: categories || []
   };
 }
 
@@ -83,8 +83,7 @@ export async function getPublishedPost(slug) {
   return {
     post: {
       ...post,
-      coverImage: post.coverImage ? localizeImage(post.coverImage) : null,
-      html: isHtml ? sanitizeHtml(post.content) : rewriteHtmlImageSources(renderMarkdown(post.content))
+      html: isHtml ? sanitizeHtml(post.content) : renderMarkdown(post.content)
     },
     relatedPosts
   };

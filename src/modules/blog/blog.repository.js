@@ -1,10 +1,13 @@
 import { Post } from "./blog.model.js";
 import { Category } from "./category.model.js";
 
-export function findPublishedPosts({ page = 1, limit = 9, search = "" } = {}) {
+export function findPublishedPosts({ page = 1, limit = 9, search = "", category = "" } = {}) {
   const query = { status: "published" };
   if (search) {
     query.$text = { $search: search };
+  }
+  if (category) {
+    query.categories = category;
   }
   return Post.find(query)
     .sort({ featured: -1, publishedAt: -1 })
@@ -13,10 +16,23 @@ export function findPublishedPosts({ page = 1, limit = 9, search = "" } = {}) {
     .lean();
 }
 
-export function countPublishedPosts({ search = "" } = {}) {
+export function countPublishedPosts({ search = "", category = "" } = {}) {
   const query = { status: "published" };
   if (search) query.$text = { $search: search };
+  if (category) query.categories = category;
   return Post.countDocuments(query);
+}
+
+export function getPublishedCategoryStats() {
+  return Post.aggregate([
+    { $match: { status: "published" } },
+    { $unwind: "$categories" },
+    { $match: { categories: { $ne: "" } } },
+    { $group: { _id: "$categories", count: { $sum: 1 } } },
+    { $sort: { count: -1, _id: 1 } }
+  ]).then((rows) =>
+    rows.map((row) => ({ name: row._id, count: row.count }))
+  );
 }
 
 export function findPostBySlug(slug) {

@@ -23,7 +23,11 @@ import {
 export async function renderBlogIndex(req, res, next) {
   try {
     const page = Math.max(1, Number(req.query.page || 1));
-    const data = await getBlogIndex({ page, search: req.query.search || "" });
+    const data = await getBlogIndex({
+      page,
+      search: req.query.search || "",
+      category: String(req.query.category || "").trim()
+    });
     res.render("pages/blog/index", {
       title: "Blog",
       meta: buildMeta(req, {

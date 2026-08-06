@@ -8,3 +8,14 @@ if (menuButton && mobileMenu) {
     mobileMenu.classList.toggle("hidden");
   });
 }
+
+document.querySelectorAll("[data-back]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = link.getAttribute("href") || "/";
+    }
+  });
+});

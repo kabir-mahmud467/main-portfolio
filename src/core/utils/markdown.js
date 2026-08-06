@@ -27,7 +27,7 @@ export function renderMarkdown(markdown) {
   function flushParagraph() {
     if (!paragraph.length) return;
     const joined = paragraph.join(" ");
-    const imageOnly = joined.match(/^!\[([^\]]*)\]\((https?:\/\/[^)]+)\)$/);
+    const imageOnly = joined.match(/^!\[([^\]]*)\]\(((?:https?:\/\/[^)]+)|\/[^)\s]+)\)$/);
     if (imageOnly) {
       html.push(
         `<img src="${imageOnly[2]}" alt="${escapeHtml(imageOnly[1])}" loading="lazy" ` +

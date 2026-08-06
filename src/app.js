@@ -18,7 +18,6 @@ import { ensureDatabaseConnection } from "./core/middleware/database.middleware.
 import { cachedPage } from "./core/middleware/renderCache.middleware.js";
 import { renderRss, renderSitemap } from "./modules/blog/blog.controller.js";
 import { renderRobots } from "./modules/pages/pages.controller.js";
-import { imageProxyRouter } from "./modules/images/imageProxy.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,8 +38,6 @@ app.use(express.static(path.join(__dirname, "public"), {
   etag: true,
   maxAge: "7d"
 }));
-
-app.use("/img", imageProxyRouter);
 
 app.use(ensureDatabaseConnection);
 app.use(attachAuthenticatedUser);
