@@ -4,7 +4,8 @@ export function viewLocals(req, res, next) {
   res.locals.app = {
     name: appConfig.name,
     url: appConfig.url,
-    year: new Date().getFullYear()
+    year: new Date().getFullYear(),
+    isProduction: appConfig.isProduction
   };
   res.locals.user = req.user || null;
   res.locals.csrfToken = req.csrfToken ? req.csrfToken() : "";

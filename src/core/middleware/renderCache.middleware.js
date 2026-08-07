@@ -21,7 +21,10 @@ export function cachedPage(options = {}) {
     const cached = renderCache.get(key);
     if (cached !== null) {
       res.set("X-Render-Cache", "HIT");
-      return res.send(cached);
+      if (typeof cached === "object" && cached.contentType) {
+        res.set("Content-Type", cached.contentType);
+      }
+      return res.send(typeof cached === "object" ? cached.body : cached);
     }
 
     let stored = false;
@@ -30,7 +33,7 @@ export function cachedPage(options = {}) {
     res.send = function sendCached(body) {
       if (!stored && typeof body === "string" && res.statusCode === 200) {
         stored = true;
-        renderCache.set(key, body, ttl);
+        renderCache.set(key, { body, contentType: res.get("Content-Type") || "" }, ttl);
         res.set("X-Render-Cache", "MISS");
       }
       return originalSend(body);

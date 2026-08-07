@@ -37,10 +37,11 @@ export function registerCoreMiddleware(app, express) {
       contentSecurityPolicy: {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-          "script-src": ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`],
+          "script-src": ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`, "https://www.googletagmanager.com"],
+          "connect-src": ["'self'", "https://www.google-analytics.com", "https://analytics.google.com", "https://www.googletagmanager.com"],
           "style-src": ["'self'", "https://fonts.googleapis.com"],
           "font-src": ["'self'", "https://fonts.gstatic.com"],
-          "img-src": ["'self'", "data:", "blob:", "https://api.qrserver.com", "https://picsum.photos", "https://fastly.picsum.photos"]
+          "img-src": ["'self'", "data:", "blob:", "https://api.qrserver.com", "https://picsum.photos", "https://fastly.picsum.photos", "https://www.google-analytics.com"]
         }
       }
     })

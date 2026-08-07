@@ -31,6 +31,15 @@
 <link rel="preload" as="style" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/main.css">
+<% if (app.isProduction) { %>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNM45MNJZB"></script>
+<script nonce="<%= cspNonce %>">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-LNM45MNJZB');
+</script>
+<% } %>
 <% if (meta.schema) { %>
   <script type="application/ld+json" nonce="<%= cspNonce %>"><%- JSON.stringify(meta.schema).replace(/</g, "\\u003c") %></script>
 <% } %>
