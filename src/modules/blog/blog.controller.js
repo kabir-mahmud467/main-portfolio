@@ -2,7 +2,6 @@ import { buildMeta } from "../../core/utils/metaBuilder.js";
 import { appConfig } from "../../config/app.config.js";
 import { buildSitemapXml } from "../../core/utils/sitemap.js";
 import { renderCache } from "../../core/utils/renderCache.js";
-import { Project } from "../projects/project.model.js";
 import {
   addCategory,
   createBlogPost,
@@ -203,26 +202,19 @@ export async function renderSitemap(req, res, next) {
   try {
     const resolvedBaseUrl = `${req.protocol}://${req.get("host")}`;
 
-    const [blogResult, projectResult] = await Promise.allSettled([
-      getSitemapUrls(resolvedBaseUrl),
-      Project.find({ status: "published" }).select("slug updatedAt publishedAt").lean()
-    ]);
-
-    const urls = blogResult.status === "fulfilled" ? blogResult.value : [];
-    const projects = projectResult.status === "fulfilled" ? projectResult.value : [];
+    let urls = [];
+    try {
+      urls = await getSitemapUrls(resolvedBaseUrl);
+    } catch {
+      // still serve a valid sitemap with static URLs
+    }
 
     const staticUrls = ["", "/about", "/contact", "/blog", "/projects", "/privacy-policy", "/terms", "/dmca"].map((path) => ({
       loc: `${resolvedBaseUrl}${path}`,
       lastmod: new Date().toISOString()
     }));
-    const projectUrls = projects
-      .filter((project) => project?.slug)
-      .map((project) => ({
-        loc: `${resolvedBaseUrl}/projects/${project.slug}`,
-        lastmod: (project.updatedAt || project.publishedAt || new Date()).toISOString()
-      }));
 
-    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, projectUrls, baseUrl: resolvedBaseUrl });
+    const xml = buildSitemapXml({ staticUrls, blogUrls: urls, baseUrl: resolvedBaseUrl });
     res.type("application/xml").send(xml);
   } catch (error) {
     next(error);

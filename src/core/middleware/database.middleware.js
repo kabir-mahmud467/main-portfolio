@@ -1,6 +1,6 @@
 import { connectDatabase } from "../../config/db.js";
 
-const CONNECT_TIMEOUT_MS = 8000;
+const CONNECT_TIMEOUT_MS = 15000;
 
 export async function ensureDatabaseConnection(req, res, next) {
   try {
