@@ -126,12 +126,12 @@ export function removeCategory(id) {
   return deleteCategory(id);
 }
 
-export async function getSitemapUrls() {
+export async function getSitemapUrls(baseUrl) {
   const posts = await findPublishedPostsForFeed(1000);
   return posts
     .filter((post) => post?.slug)
     .map((post) => ({
-      loc: `${appConfig.url}/blog/${post.slug}`,
+      loc: `${baseUrl || appConfig.url}/blog/${post.slug}`,
       lastmod: (post.updatedAt || post.publishedAt || post.createdAt || new Date()).toISOString()
     }));
 }

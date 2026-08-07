@@ -179,10 +179,11 @@ export function renderDmcapage(req, res) {
 }
 
 export function renderRobots(req, res) {
+  const baseUrl = `${req.protocol}://${req.get("host")}`;
   res.type("text/plain").send(`User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: ${appConfig.url}/sitemap.xml
+Sitemap: ${baseUrl}/sitemap.xml
 `);
 }
