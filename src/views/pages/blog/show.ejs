@@ -8,7 +8,7 @@
     </div>
     <%- include("../../partials/breadcrumbs") %>
     <h1 class="mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl"><%= post.title %></h1>
-    <p class="mt-5 text-lg leading-8 text-ink/70 dark:text-white/60"><%= post.excerpt %></p>
+    <p class="mt-5 text-lg leading-8 text-ink/70 dark:text-white/75"><%= post.excerpt %></p>
     <div class="mt-5 flex flex-wrap gap-3 text-sm font-bold text-ink/55 dark:text-white/70">
       <span><%= post.readingTime %> min read</span>
       <% (post.categories || []).forEach((category) => { %><a class="rounded-md bg-[#7c3aed]/10 px-2 py-0.5 text-[#7c3aed] transition-colors hover:bg-[#7c3aed]/20 dark:bg-[#a78bfa]/15 dark:text-[#a78bfa]" href="/blog?category=<%= encodeURIComponent(category) %>"><%= category %></a><% }) %>

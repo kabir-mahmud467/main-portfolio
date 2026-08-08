@@ -126,7 +126,7 @@
   }
 
   .dark .prose {
-    @apply text-[#a0a8bd];
+    @apply text-[#dce2ef];
   }
 
   .dark .prose h1,
@@ -140,7 +140,7 @@
   }
 
   .dark .prose blockquote {
-    @apply border-[#a78bfa] bg-[#a78bfa]/10 text-[#c9d1e8];
+    @apply border-[#a78bfa] bg-[#a78bfa]/10 text-[#dfe4f2];
   }
 
   .dark .prose :where(code):not(pre code) {
@@ -160,7 +160,7 @@
   }
 
   .dark .prose td {
-    @apply border-white/10 text-[#c9d1e8];
+    @apply border-white/10 text-[#dfe4f2];
   }
 
   .dark .prose hr {
