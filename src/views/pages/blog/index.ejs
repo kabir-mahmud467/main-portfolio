@@ -44,7 +44,7 @@
             </div>
           <% } %>
           <p class="mt-3 text-sm leading-6 text-ink/70 dark:text-white/60"><%= post.excerpt %></p>
-          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-ink/55 dark:text-white/45">
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold text-ink/55 dark:text-white/70">
             <span><%= post.readingTime %> min read</span>
             <% (post.tags || []).slice(0, 3).forEach((tag) => { %><span>#<%= tag %></span><% }) %>
           </div>

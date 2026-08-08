@@ -1,6 +1,6 @@
 export default {
   darkMode: "class",
-  content: ["./src/views/**/*.ejs", "./src/public/js/**/*.js"],
+  content: ["./src/views/**/*.ejs", "./src/public/js/**/*.js", "./src/core/utils/**/*.js"],
   theme: {
     extend: {
       colors: {

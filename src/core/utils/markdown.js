@@ -11,7 +11,7 @@ function inlineMarkdown(value) {
   return escapeHtml(value)
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/`(.+?)`/g, '<code class="rounded bg-ink/10 px-1 py-0.5">$1</code>')
+    .replace(/`(.+?)`/g, '<code class="rounded bg-ink/10 px-1 py-0.5 dark:bg-[#a78bfa]/15 dark:text-[#c4b5fd]">$1</code>')
     .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a class="font-bold text-flame hover:text-ink" href="$2" rel="noopener noreferrer">$1</a>');
 }
 
@@ -63,9 +63,9 @@ export function renderMarkdown(markdown) {
       .slice(1)
       .filter((r) => !r.match(/^\|[\s:|-]+\|$/));
     const cell = (content, tag) =>
-      `<${tag} class="border border-line/60 bg-white/5 px-3 py-2 text-left align-top text-sm text-ink/80">${inlineMarkdown(content.trim())}</${tag}>`;
+      `<${tag} class="border border-line/60 bg-white/5 px-2.5 py-2 text-left align-top text-xs break-words [overflow-wrap:anywhere] sm:px-3 sm:text-sm text-ink/80 dark:border-white/10 dark:text-white/80">${inlineMarkdown(content.trim())}</${tag}>`;
     return (
-      `<div class="mt-6 overflow-x-auto rounded-xl border border-line/70 bg-white/40 shadow-soft">` +
+      `<div class="mt-6 overflow-x-auto rounded-xl border border-line/70 bg-white/40 shadow-soft dark:border-white/10 dark:bg-white/10">` +
       `<table class="w-full border-collapse text-sm">` +
       `<thead><tr>${headers.map((h) => cell(h, "th")).join("")}</tr></thead>` +
       `<tbody>${body.map((r) => `<tr>${r.split("|").map((c) => c.trim()).filter((c) => c !== "").map((c) => cell(c, "td")).join("")}</tr>`).join("")}</tbody>` +
@@ -127,7 +127,7 @@ export function renderMarkdown(markdown) {
       closeList();
       if (!inQuote) {
         inQuote = true;
-        html.push(`<blockquote class="my-6 border-l-4 border-flame/60 bg-white/40 px-4 py-2 italic text-ink/70">`);
+        html.push(`<blockquote class="my-6 border-l-4 border-flame/60 bg-white/40 px-4 py-2 italic text-ink/70 dark:border-[#a78bfa]/60 dark:bg-[#a78bfa]/10 dark:text-[#c9d1e8]">`);
       }
       html.push(`<p>${inlineMarkdown(quoteMatch[1])}</p>`);
       continue;
@@ -144,8 +144,8 @@ export function renderMarkdown(markdown) {
         listType = nextType;
         html.push(
           nextType === "ul"
-            ? `<ul class="my-5 list-disc space-y-2 pl-6 text-ink/80">`
-            : `<ol class="my-5 list-decimal space-y-2 pl-6 text-ink/80">`
+            ? `<ul class="my-5 list-disc space-y-2 pl-6 text-ink/80 dark:text-white/80">`
+            : `<ol class="my-5 list-decimal space-y-2 pl-6 text-ink/80 dark:text-white/80">`
         );
       }
       html.push(`<li>${inlineMarkdown(content)}</li>`);
